@@ -1,0 +1,11 @@
+Histogram：柱状图组件
+histogramD：单个柱状图（配合表格）
+ProgressBar：进度条组件
+ShopBox：商品盒子组件
+Notifications：通知组件
+SearchBox：搜索组件
+Tracking：追踪器组件
+TitleName：标题组件
+OnOrder：首页左侧表格
+PieChart：饼图
+CustomButton：公用按钮组件

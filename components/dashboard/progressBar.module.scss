@@ -1,0 +1,910 @@
+@import './theme.scss';
+
+
+//顶部导航组件
+.nav {
+    .Head {
+        padding: 30px 16px 0px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .nowLeftBox {
+            display: flex;
+            align-items: center;
+            // justify-content: space-between;
+        }
+
+        .logo {
+            // flex: 1;
+            width: 72px;
+            // height: 36px;
+            margin-right: 54px;
+        }
+
+        .searchBoxA {
+            // width: 40%;
+            width: 662px;
+        }
+
+        .right {
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            box-sizing: border-box;
+            font-size: 12px;
+            border-radius: 30px;
+            border: 2px solid #000000;
+            color: #fff;
+
+            .textBordus {
+                width: 30px;
+                height: 30px;
+                background-color: #7651F0;
+                border-radius: 100%;
+                line-height: 30px;
+            }
+
+            .bgText {
+                margin: 0 10px;
+            }
+
+            .rightText {
+                background-color: #7651F0;
+                line-height: 30px;
+                border-radius: 0 30px 30px 0;
+                padding: 0 15px;
+                font-size: 12px;
+                white-space: nowrap;
+
+            }
+        }
+    }
+}
+
+//进度条CSS
+.ProgressBarbox {
+    width: 100%;
+    // width: 744px;
+    margin-bottom: 15px;
+
+    .topBox {
+        display: flex;
+        background-color: rgb(204, 204, 204);
+        border-radius: 20px;
+        overflow: hidden;
+        height: 10px;
+    }
+
+    .BottomBox {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 5px;
+
+        .itemBox {
+            display: flex;
+            align-items: center;
+
+            .ball {
+                width: 10px;
+                height: 10px;
+                border-radius: 50%;
+                background-color: #f00;
+                margin-right: 5px;
+            }
+
+            .text {
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 15px;
+                margin-right: 5px;
+            }
+
+            .textNum {
+                font-family: via_Futura_700;
+                font-weight: 700;
+                font-size: 11px;
+            }
+        }
+    }
+}
+
+
+
+
+// 商品盒子组件CSS
+.ShopBox {
+    width: 100%;
+    // background: rgba(0, 0, 0, 0.05);
+    padding: 10px;
+    box-sizing: border-box;
+    display: flex;
+    background: #FFFFFF;
+    border: 1px solid rgba(56, 58, 66, 0.2);
+    border-radius: 4px;
+    align-items: flex-start;
+
+    .leftBox {
+        width: 25%;
+        background-color: aqua;
+    }
+
+    .rightBox {
+        flex: 1;
+        margin-left: 10px !important;
+
+        .rightBj {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .title {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 21px;
+            letter-spacing: 0.05em;
+            margin-bottom: 2px;
+
+        }
+
+        .text {
+            font-weight: 500;
+            font-size: 11px;
+            line-height: 15px;
+            /* identical to box height */
+            text-align: justify;
+            color: rgba(0, 0, 0, 0.5);
+            // margin: 0.8vw 0 1vw;
+            // margin: 10px 0 10px;
+
+        }
+
+        .isTab {
+            background-color: #fff;
+            // margin: 7px 0 15px;
+            display: block;
+            transition: 0.8s;
+            position: relative;
+
+            .itemDefault {
+                border-bottom: 1px solid rgb(242, 242, 242);
+                display: flex;
+
+                .textName {
+                    padding: 13.5px 0 13.5px 5px;
+                    border-right: 1px solid rgb(242, 242, 242);
+                    width: 41%;
+                    font-size: 11px;
+                    font-weight: 400;
+                }
+
+                .textValue {
+                    padding: 13.5px 0 13.5px 5px;
+                    font-size: 10px;
+                    font-weight: 500;
+                    width: 59%;
+
+                }
+
+                .textValueSpecial {
+                    padding: 7px 0px 7px 5px;
+                    width: 59%;
+                    display: flex;
+                    align-items: flex-start;
+
+                    .leftItem {
+                        font-size: 10px;
+
+                        .topText {
+                            font-size: 7px;
+                            color: rgba(0, 0, 0, 0.5);
+
+                            span {
+                                transform: scale(0.58, 0.58);
+                                display: inline-block;
+                                margin-left: -38%;
+                                width: 172%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .btnList {
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-between;
+
+            .itemBox {
+                display: flex;
+                justify-content: flex-start;
+                font-size: 10px;
+                align-items: center;
+                margin-right: 6.5px;
+                // background-color: #f00;
+                padding-right: 15px;
+
+                // &:first-child{
+                //     min-width: 60px;
+                // }
+                // &:nth-child(2){
+                //     min-width: 60px;
+                // }
+                .color1 {
+                    background-color: #00DD81;
+                    color: #fff;
+                    border-radius: 50%;
+                    width: 15px;
+                    text-align: center;
+                    line-height: 15px;
+                    height: 15px;
+                    margin-left: 1px;
+                    // margin-left: 1px;
+                }
+
+                .color2 {
+                    background: rgba(0, 0, 0, 0.1);
+                    color: #000;
+                    border-radius: 50%;
+                    width: 15px;
+                    text-align: center;
+                    line-height: 15px;
+                    height: 15px;
+                    margin-left: 1px;
+                }
+
+            }
+
+            .leftBtn {
+                background: rgba(0, 0, 0, 0.05);
+                text-align: center;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 16px;
+                padding: 8px 10px;
+                cursor: pointer;
+                border-radius: 2px;
+                width: 70px;
+                justify-content: center;
+                margin-right: 5px;
+            }
+
+            .rightBtn {
+                background: rgba(0, 0, 0, 0.05);
+                text-align: center;
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 16px;
+                padding: 8px 22px;
+                border-radius: 2px;
+                flex: 1;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+//通知组件
+.Notifications {
+    width: 100%;
+    // width: 342px;
+    margin: 0px 0 10px;
+
+    .defaultColor {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+        display: flex;
+        padding: 13px;
+    }
+
+    .errorColor {
+        background: rgba(255, 0, 0, 0.1);
+        border-radius: 2px;
+        display: flex;
+        padding: 13px;
+    }
+
+    .warningColor {
+        background: rgba(249, 149, 0, 0.1);
+        border-radius: 2px;
+        display: flex;
+        padding: 13px;
+    }
+
+    .left {
+        width: 20px;
+        // height: 100%;
+    }
+
+    .content {
+        margin: 0 13.07px;
+        flex: 1;
+
+        .title {
+            font-family: via_Futura_700;
+            font-weight: 700;
+            font-size: 12px;
+            line-height: 16px;
+        }
+
+        .textTime {
+            font-weight: 500;
+            margin: 5px 0;
+            font-size: 11px;
+            line-height: 15px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .textAll {
+            font-size: 11px;
+            line-height: 15px;
+            font-weight: 500;
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .right {
+        width: 20px;
+
+        div {
+            cursor: pointer;
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+}
+
+
+
+//搜索组件
+.SearchBox {
+    width: 100%;
+    // width: 347px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+
+    .btnSearch {
+        padding: 2px 5px;
+        border-radius: 2px;
+        background-color: #000;
+        color: #fff;
+    }
+
+    .btnSubmit {
+        padding: 6px 10px;
+        border-radius: 2px;
+        background-color: #000;
+        letter-spacing: 0.1em;
+        color: #fff;
+        line-height: 16px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+    }
+}
+
+//追踪器样式
+.Tracking {
+    width: 100%;
+    // width: 342px;
+
+    background-color: #fff;
+
+    .itemBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        // padding: 10px 0;
+        padding: 12px 0;
+        border-bottom: 1px solid rgb(230, 230, 230);
+
+        .leftBox {
+            // width: ;
+            flex: 1;
+
+            .title {
+                font-family: via_Futura_700;
+                font-weight: 700;
+                font-size: 12px;
+                line-height: 16px;
+                text-transform: uppercase;
+            }
+
+            .speed {
+                width: 100%;
+
+                div {
+                    width: 80%;
+                    height: 5px;
+                    background-color: #f00;
+                    margin: 7px 0 5px;
+                    border-top-right-radius: 5px;
+                    border-bottom-right-radius: 5px;
+
+                }
+            }
+
+            .littleTerm {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: flex-start;
+                // background-color: #f00;
+                align-items: center;
+                overflow: hidden;
+                height: 18px;
+
+                .newTitle {
+                    margin-right: 10px;
+                    color: #000;
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 15px;
+                    width: 100px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+
+                }
+
+                .item {
+                    font-weight: 500;
+                    font-size: 11px;
+                    line-height: 15px;
+                    color: rgba(0, 0, 0, 0.5);
+                    text-decoration-line: underline;
+                    cursor: pointer;
+                    margin-right: 20px;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+
+        .rightBox {
+            width: 18px;
+            cursor: pointer;
+        }
+    }
+
+}
+
+//柱状图组件
+.Histogram {
+    width: 100%;
+
+
+    .content {
+
+        // margin-top: 40px;
+        .item {
+            margin: 20px 0;
+            display: flex;
+            font-size: 12px;
+            width: 100%;
+
+            .name {
+                color: #000;
+                width: 80px;
+                // background-color: aqua;
+                text-align: right;
+                padding-right: 20px;
+                font-size: 12px;
+            }
+
+            .value {
+                // flex: 1;
+                height: 5px;
+                background-color: #f00;
+                margin: 7px 0;
+                border-radius: 5px;
+                position: relative;
+                width: 0;
+            }
+
+            .text {
+                width: 50px;
+                flex: 1;
+                margin-left: 10px;
+                // background-color: aqua;
+                text-align: left;
+            }
+        }
+    }
+}
+
+
+
+//标题 
+.TitleName {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .leftName {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .rightName {
+        width: 50%;
+        position: relative;
+    }
+}
+
+
+//左边表格
+.OnOrder {
+    width: 100%;
+    // border: 1px solid rgb(230,230,230);
+    border-radius: 8px;
+    margin-top: 20px;
+
+    .itemBoxA {
+        display: flex;
+        font-size: 12px;
+        border-bottom: 1px solid rgb(230, 230, 230);
+
+        .left {
+            width: 49%;
+            // padding: 20px 10px;
+            border-right: 1px solid rgb(230, 230, 230);
+        }
+
+        .right {
+            font-family: via_Futura_700;
+            width: 50%;
+            padding: 20px 10px;
+            text-decoration: underline;
+            font-size: 12px;
+            font-weight: 700;
+        }
+    }
+}
+
+//按钮组件
+.CustomButton {
+    display: flex;
+    padding: 5px 10px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 2px;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+    justify-content: center;
+
+    .name {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    &>div:last-child {
+        display: inline-block;
+        vertical-align: middle;
+    }
+}
+
+//饼图组件
+.PieChart {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+
+    .mountNode {
+        padding: 0;
+        width: 60%;
+        margin: 0;
+        position: relative;
+        left: -20px;
+        top: 0px;
+        margin-top: -10px;
+        margin-bottom: -10px;
+    }
+
+    .right {
+        width: 60%;
+        position: relative;
+        left: -15px;
+
+        .bottomBtn {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            text-decoration: underline;
+            border-radius: 2px;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 13px;
+            text-align: center;
+            margin-top: 15px;
+            padding: 5px 0;
+            cursor: pointer;
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 10px;
+            margin-top: 10px;
+
+            .leftBox {
+                span {
+                    display: inline-block;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%;
+                    margin-right: 10px;
+                }
+            }
+
+            .rightBox {
+                font-family: via_Futura_700;
+                font-size: 12px;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+//表格组件
+.TableBox {
+    width: 100%;
+    margin-top: 20px;
+}
+
+//下拉选择组件
+.SelectBox {
+    // max-width: 230px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .name {
+        min-width: 20px;
+        font-size: 12px;
+        margin-right: 5px;
+        font-weight: 500;
+
+    }
+}
+
+
+
+
+//新增左侧筛选弹出框
+.RightSeeHistory {
+    position: fixed;
+    width: 412px;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: #FFFFFF;
+    box-shadow: -10px 0px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    overflow-y: auto;
+    padding: 20px 30px;
+
+    .topBox {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        background: rgba(0, 0, 0, 0.05);
+        padding: 10px;
+        margin-top: 68.5px;
+
+        .left {
+            margin-right: 10px;
+            width: 86px;
+            height: 86px;
+        }
+
+        .right {
+            .title {
+                font-weight: 500;
+                font-size: 16px;
+                line-height: 21px;
+                text-transform: uppercase;
+                margin-bottom: 3px;
+            }
+
+            .xtitle {
+                font-weight: 500;
+                font-size: 10px;
+                line-height: 13px;
+                text-transform: uppercase;
+
+                color: rgba(0, 0, 0, 0.5);
+
+            }
+
+            .btn {
+                margin-top: 10px;
+            }
+        }
+    }
+
+    .sjzBox {
+        margin-top: 60px;
+
+        .contentBox {
+            margin-top: 30px;
+        }
+
+        .contentBox {
+            .itemSjBox1 {
+                border: 2px solid #CCFF00;
+                border-radius: 2px;
+                width: 272px;
+                border-left: none;
+                // height: 123px;
+                display: flex;
+                justify-content: flex-start;
+                position: relative;
+
+                .left {
+                    width: 8px;
+                    height: 128px;
+                    background: #000000;
+                    border-radius: 4px 0px 0px 4px;
+                }
+
+                .content {
+                    padding: 5px 15px;
+
+                    .title {
+                        font-size: 12px;
+
+                        .iconBox {
+                            width: 18px;
+                            height: 18px;
+                            display: inline-block;
+                            color: #fff;
+                            line-height: 18px;
+                            background-color: greenyellow;
+                            font-size: 12px;
+                            border-radius: 50%;
+                            letter-spacing: -1px;
+                            text-align: center;
+                        }
+                    }
+
+                    .xtitle {
+                        font-weight: 500;
+                        font-size: 11px;
+                        line-height: 15px;
+                        /* identical to box height */
+                        margin: 10px 0;
+
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+
+                    .textBox {
+                        padding: 5px;
+                        gap: 10px;
+
+
+
+                        background: rgba(0, 0, 0, 0.05);
+                        font-family: 'Times New Roman';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 18px;
+                        /* or 150% */
+
+                        display: flex;
+                        align-items: center;
+
+                        color: #000000;
+                    }
+                }
+            }
+
+            .itemSjBox2 {
+                // border: 2px solid #CCFF00;
+                border-radius: 2px;
+                width: 272px;
+                border-left: none;
+                // height: 123px;
+                display: flex;
+                justify-content: flex-start;
+                position: relative;
+                background: rgba(0, 0, 0, 0.05);
+
+                .content {
+                    padding: 10px 15px;
+
+                    .title {
+                        font-size: 12px;
+
+                        .iconBox {
+                            width: 18px;
+                            height: 18px;
+                            display: inline-block;
+                            color: #fff;
+                            line-height: 18px;
+                            background-color: greenyellow;
+                            font-size: 12px;
+                            border-radius: 50%;
+                            letter-spacing: -1px;
+                            text-align: center;
+                        }
+                    }
+
+                    .xtitle {
+                        margin: 10px 0;
+                    }
+
+                    .textBox {
+                        padding: 5px;
+                        gap: 10px;
+
+
+
+                        font-family: 'Times New Roman';
+                        font-style: normal;
+                        font-weight: 400;
+                        font-size: 12px;
+                        line-height: 18px;
+                        /* or 150% */
+
+                        display: flex;
+                        align-items: center;
+
+                        color: #000000;
+
+                        .tsBox {
+                            padding: 3px;
+                            box-sizing: border-box;
+                            background-color: #fff;
+                            width: 100%;
+                            border: 1px solid rgba(0, 0, 0, 0.2);
+                            border-radius: 20px;
+                            display: flex;
+                            height: 24px;
+                            align-items: center;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .backOf {
+        // text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        cursor: pointer;
+
+        // line-height: 30px;
+        &>div:first-child {
+            margin-right: 10px;
+            text-decoration: underline;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 16px;
+            /* identical to box height */
+            letter-spacing: 0.05em;
+            color: rgba(0, 0, 0, 0.5);
+
+        }
+    }
+
+    .btnList {
+        display: flex;
+        justify-content: space-between;
+        margin: 68px 0 70px;
+    }
+
+    .itemBox {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}

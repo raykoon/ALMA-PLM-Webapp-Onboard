@@ -1,0 +1,99 @@
+@import '../../../styles/theme.scss';
+
+.alma404Warper {
+    background-color: #000000;
+    padding-top: 70px;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .almaLogo {
+        width: 146.24px;
+        height: 30px;
+        background: url(/images/global/alma-logo.svg) no-repeat center/100% 100%;
+        margin-bottom: 40px;
+    }
+
+    .almaLeft {
+        position: absolute;
+        width: 655.32px;
+        height: 717.83px;
+        left: -108.2px;
+        top: 0;
+        // transform: matrix(1, 0, 0, -1, 0, 0);
+        background: url(/images/global/alma-split-left.svg) no-repeat center/100% 100%;
+    }
+
+    .almaRight {
+        position: absolute;
+        width: 647.58px;
+        height: 724.04px;
+        right: 0;
+        margin-left: calc(100vw - 547px);
+        top: calc(100vh - 724.04px);
+        background: url(/images/global/alma-split-right.svg) no-repeat center/100% 100%;
+    }
+
+
+    .title,
+    .title500 {
+        color: #fff;
+        font-size: 48px;
+        line-height: 64px;
+        margin-top: calc(50vh - 184px);
+    }
+
+    .title500 {
+        width: 500px;
+        text-align: center;
+
+    }
+
+    .text,
+    .text502 {
+        font-size: 14px;
+        line-height: 19px;
+        margin: 30px 0;
+        color: #fff;
+    }
+
+    .text502 {
+        width: 417px;
+        text-align: center;
+
+        a {
+            color: #7651F0;
+            text-decoration: underline;
+        }
+    }
+
+    .btn {
+        margin-bottom: 60px;
+        background: #CCFF00;
+        border: 0px solid #CCFF00;
+        border-radius: 4px;
+        padding: 0 20px;
+        height: 40px;
+        width: 135px;
+        line-height: 40px;
+        font-weight: 600;
+        font-size: 14px;
+
+        color: #000;
+        text-align: center;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .img,
+    .img500,
+    .img401,
+    .img502 {
+        width: 430px;
+        height: 430px;
+
+    }
+}

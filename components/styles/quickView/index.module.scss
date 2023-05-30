@@ -1,0 +1,246 @@
+.topTabBox {
+  margin-top: 30px;
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 0px 0px 4px 4px;
+
+  .img {
+    width: 35%;
+
+    .coverImgBox {
+      width: 430px;
+      height: 430px;
+      display: flex;
+      overflow: hidden;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      .uploadBox {
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        align-items: center;
+        justify-content: center;
+        transition: .4s;
+        position: absolute;
+      }
+
+      .show {
+        opacity: 1;
+      }
+
+      &:hover {
+        .uploadBox {
+          opacity: 1;
+          transition: .4s;
+        }
+
+      }
+    }
+
+  }
+
+  .table {
+    margin-left: 20px;
+    width: calc(65% - 20px);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    .title {
+      width: 100%;
+
+      h3 {
+        font-family: Poppins;
+        font-size: 18px;
+        line-height: 24px;
+        height: 24px;
+        text-transform: uppercase;
+        color: #000000;
+      }
+
+      p {
+        font-family: Poppins;
+        font-size: 14px;
+        line-height: 20px;
+        height: 20px;
+        text-transform: uppercase;
+        color: rgba(0, 0, 0, 0.5);
+      }
+    }
+
+    .dragTableBox {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+
+
+
+      .gridTable {
+        width: 100%;
+        flex-basis: 0;
+        flex-grow: 1;
+
+        .gridTd {
+          margin: 0 2.5px 2px;
+          width: calc((100% / 2) - 5px);
+          display: inline-block;
+
+          .dragTd {
+            padding-left: 10px;
+            width: 100%;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            background: #F5F5F5;
+            border-radius: 4px;
+
+
+
+            .key {
+              width: 40%;
+              display: flex;
+              align-items: center;
+
+              span {
+                margin-left: 10px;
+                font-family: "Times New Roman";
+              }
+
+              span {
+                margin-left: 10px;
+              }
+            }
+
+            .value {
+              padding: 0 10px;
+              width: 60%;
+              height: 50px;
+              display: flex;
+              cursor: pointer;
+              align-items: center;
+
+              .txt {
+                width: calc(100% - 10px);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+
+                >span {
+                  top: 50%;
+                  right: 0;
+                  margin-top: -9px;
+                  z-index: 9;
+                  font-size: 14px;
+                  line-height: 18px;
+                  color: rgba(0, 0, 0, 0.5);
+                  position: absolute;
+                }
+
+              }
+
+              .sel {
+                width: 100%;
+              }
+
+              .tag {
+                margin-right: 5px;
+                padding: 2px 5px;
+                background: rgba(0, 0, 0, 0.1);
+                border-radius: 2px;
+              }
+
+              .colorBox {
+                margin-right: 5px;
+                padding: 2px 5px 2px 2px;
+                display: flex;
+                align-items: center;
+                border: 1px solid rgba(0, 0, 0, 0.2);
+                border-radius: 2px;
+                background: #ffffff;
+
+                .color {
+                  width: 36px;
+                  height: 36px;
+                }
+
+                .colorTxt {
+                  margin-left: 5px;
+                  display: flex;
+                  flex-direction: column;
+
+                  p {
+                    margin: 0;
+                    font-size: 12px;
+                  }
+
+                  span {
+
+                    margin: 0;
+                    font-size: 12px;
+                  }
+
+                }
+              }
+
+              .sizeBox {
+                display: flex;
+                align-items: center;
+
+                >div {
+                  margin-right: 5px;
+                  padding: 5px 10px;
+                  border: 1px solid #000000;
+                }
+
+              }
+
+            }
+
+          }
+        }
+
+
+      }
+
+
+    }
+
+    .tableAddBtn {
+      margin-top: 5px;
+      width: 100%;
+      height: 50px;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      border: 2px dashed rgba(0, 0, 0, .5);
+
+      >div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+
+        span {
+          margin-left: 10;
+          font-size: 14px;
+          line-height: 19px;
+          color: rgba(0, 0, 0, 0.5);
+          font-family: Poppins;
+          font-style: italic;
+        }
+      }
+
+    }
+  }
+}

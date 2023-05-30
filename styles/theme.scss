@@ -1,0 +1,291 @@
+// loading Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@200;300;400;500;600;700&family=Roboto:wght@300;400;500;700;900&display=swap');
+
+@font-face {
+    font-family: 'Poppins';
+    // src: url('../public/font/Poppins-500.ttf');
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+}
+
+@font-face {
+    font-family: 'via_Futura_700';
+    // src: url('../public/font/Poppins-700.ttf');
+    src: url('../public/font/Futura-700.ttf');
+
+}
+
+.loadings {
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    background-color: #f5f5f5;
+}
+
+$font-colorTitleStyle1: #383A42;
+$font-colorTitleStyle2: #616161;
+
+$font-colorStyle1: #F5F5F5;
+$font-colorStyle2: #AFAFAF;
+$font-colorStyle3: #C4C4C4;
+
+
+$font-colorHighlightStyle1: #7651F0;
+$font-colorHighlightStyle2: #13DE89;
+$font-colorHighlightStyle3: #F99500;
+$font-colorHighlightStyle4: #522FC9;
+
+$bg-color: #fff;
+
+// Kira Fonts
+.robotoMono {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.roboto {
+    font-family: 'Roboto', sans-serif;
+}
+
+.mulish {
+    font-family: 'Mulish', sans-serif;
+}
+
+.poppins {
+    font-family: 'Poppins', sans-serif;
+}
+
+$strIndent: 10px;
+
+.btnBack {
+    border: 2px solid #7651F0;
+    border-radius: 4px;
+    width: 210px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+
+    i {
+        font-weight: normal;
+        margin-right: 13px;
+        font-size: 12px;
+    }
+}
+
+.backHeaderNew {
+    text-align: center;
+    width: 210px;
+    margin-right: 20px;
+    background: rgba(56, 58, 66, 0.1);
+    opacity: 0.7;
+    padding: 0 13px;
+    border-radius: 4px;
+    line-height: 44px;
+    height: 44px;
+    cursor: pointer;
+
+    i {
+        margin-right: 8px;
+    }
+}
+
+.modalMask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    height: 100%;
+    background: rgba(56, 58, 66, 0.7);
+    opacity: 0;
+    backdrop-filter: blur(20px);
+    transition: all .2s;
+}
+
+.modalWarp {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+    outline: 0;
+    z-index: -1;
+    transition: all .2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalBox {
+    min-width: 500px;
+    min-height: 300px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    transform: scale(0);
+    transition: transform .2s;
+}
+
+.modalBoxTrue {
+    transform: scale(1);
+}
+
+.modalBoxFalse {
+    transform: scale(0);
+}
+
+.modalBgTrue {
+    z-index: 999;
+    opacity: 1;
+}
+
+.modalBgFalse {
+    z-index: -1;
+    opacity: 0;
+}
+
+.AntmodalStyle {
+    :global {
+        .ant-modal {
+            width: 529px !important;
+
+        }
+
+        .ant-modal-content {
+            border-radius: 8px !important;
+            width: 529px;
+
+        }
+
+        .ant-modal-body {
+            width: 529px;
+            padding: 30px;
+            background: #FFFFFF;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px !important;
+        }
+
+    }
+
+}
+
+.offOn {
+    position: absolute;
+    background: #13DE89;
+    border: 2px solid #FFFFFF;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    bottom: 0;
+    right: 0;
+}
+
+.btnNextSubmitWarper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    .btnNextSubmit {
+        cursor: pointer;
+        padding: 0 20px;
+        height: 100%;
+        height: 44px;
+        background: #7651F0;
+        border: 2px solid #7651F0;
+        border-radius: 4px;
+        color: #FFFFFF;
+        line-height: 40px;
+        text-align: center;
+        display: inline-block;
+        font-size: 14px;
+        transition: all .3s;
+
+        i {
+            font-weight: 100;
+            font-size: 13px;
+            margin-left: 5px;
+        }
+
+    }
+
+    .btnNextSubmit:hover {
+        background: #6038E8;
+    }
+}
+
+.pointsBtn {
+    width: 112px;
+    padding: 0 10px;
+    display: inline-block;
+    background: rgba(19, 222, 137, 0.1);
+    border: 1px solid #13DE89;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #00BB6C;
+    height: 37px;
+    text-align: center;
+    line-height: 35px;
+    margin-bottom: 10px;
+}
+
+.purpleBtn {
+    i {
+        font-weight: normal;
+        // margin: 0 10px;
+        margin-right: 10px;
+    }
+
+    width: 100%;
+
+    font-weight: 600;
+    font-size: 14px;
+    height: 44px;
+    background: #7651F0 !important;
+    border: 2px solid #7651F0;
+    border-radius: 4px;
+    color: #fff !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .3s;
+    border: none;
+
+}
+
+.purpleBtn:hover {
+    background-color: #6038E8 !important;
+    color: #fff !important;
+    border: none;
+
+}
+
+.CancelBtn {
+    font-weight: 600;
+    font-size: 14px;
+    height: 44px;
+    border-radius: 4px;
+    background-color: rgba(196, 196, 196, 0.3) !important;
+    color: #383A42;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer;
+}
+
+.CancelBtn:hover {
+    color: #383A42 !important;
+    border: none;
+}

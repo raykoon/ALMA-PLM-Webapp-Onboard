@@ -1,0 +1,2195 @@
+//首页Box
+.BlockItemBox {
+    background-color: #fff;
+    padding: 20px 20px 10px;
+    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+
+
+    .topBox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .topLeftBox {
+            .titleColor {
+                margin-bottom: 20px;
+            }
+
+            .btn {
+                margin-bottom: 32px;
+            }
+
+        }
+
+        .topRightBox {
+            width: 100px;
+        }
+    }
+
+    .coverImgBox {
+        margin: 20px auto 5px;
+        width: 324px;
+        height: 324px;
+        display: flex;
+        overflow: hidden;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .coverImgBox {
+        margin: 20px auto 5px;
+        width: 324px;
+        height: 324px;
+        display: flex;
+        overflow: hidden;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tabContent {
+
+        .item {
+            display: flex;
+            border-bottom: 1px solid rgb(204, 204, 204);
+            height: 40px;
+            font-size: 12px;
+
+            // line-height: ;
+            .leftText {
+                padding: 0px 5px;
+                line-height: 40px;
+                border-right: 1px solid rgb(204, 204, 204);
+                font-family: 'Times New Roman' !important;
+                width: 108px;
+            }
+
+            .rightText {
+                padding: 0px 5px;
+                line-height: 40px;
+            }
+
+            .rightBtn {
+                margin-top: 5px;
+                margin-left: 5px;
+
+                div {
+                    padding: 5px;
+                    font-size: 14px;
+                    line-height: 9px;
+                }
+            }
+
+            &:last-child {
+                border-bottom: 0;
+            }
+        }
+    }
+
+    .newTitleBox {
+        margin-bottom: 10px;
+
+        .topTileNew {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .topTileNew1 {
+            display: flex;
+            margin-top: 5px;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 13px;
+            text-transform: uppercase;
+
+            color: rgba(0, 0, 0, 0.5);
+        }
+    }
+
+    .newBottomBox {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 0px 0px;
+        gap: 5px;
+        font-size: 10px;
+        // width: 342px;
+        height: 34px;
+
+        background: #FFFFFF;
+        box-shadow: 0px -1px 0px rgba(0, 0, 0, 0.2);
+
+        .item {
+            display: flex;
+            align-items: center;
+
+            .itemIcon {
+                position: relative;
+                top: 3px;
+            }
+
+            .itemText {
+                margin: 0 2px;
+            }
+
+            .itemNum {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                color: #fff;
+                line-height: 15px;
+                text-align: center;
+
+            }
+        }
+    }
+
+    .titleColor {
+        // background-color: rgb(220, 255, 77);
+        display: inline-block;
+        font-size: 18px;
+        height: 20px;
+        line-height: 20px;
+        font-family: Poppins;
+        font-weight: 500;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
+
+
+//首页LIST模式
+.blockItemList {
+    width: 100%;
+    position: relative;
+
+    .zzc {
+        position: absolute;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.5);
+        top: 45px;
+        left: 0;
+        height: calc(100% - 45px);
+    }
+
+    .tagList {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .item {
+            display: flex;
+            align-items: center;
+
+            .itemIcon {
+                position: relative;
+                top: 3px;
+            }
+
+            .itemNum {
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                color: #fff;
+                line-height: 15px;
+                text-align: center;
+                margin-left: 2px;
+
+            }
+        }
+    }
+
+    .nameBox {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+
+        .nameLeft {
+            margin-right: 10px;
+            position: relative;
+            top: 2px;
+        }
+
+        .nameRight {
+            flex: 1;
+
+            .nameTop {
+                // background-color: rgb(220, 255, 77);
+                display: inline-block;
+                font-size: 16px;
+                line-height: 16px;
+                font-family: Poppins;
+                font-weight: 500;
+                margin-bottom: 12px;
+            }
+
+            .nameBottom {
+                font-weight: 500;
+                font-size: 12px;
+                line-height: 16px;
+                /* identical to box height */
+
+                text-transform: uppercase;
+
+                color: rgba(0, 0, 0, 0.5);
+
+            }
+        }
+    }
+
+    .sortBox {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 13px;
+
+        .title {
+            margin-bottom: 5px;
+            color: rgba(0, 0, 0, 0.5);
+
+        }
+
+        .value {
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 13px;
+
+        }
+    }
+
+    .newSortBox {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+        font-size: 10px;
+        line-height: 13px;
+    }
+}
+
+
+//标签组件
+.TagBox {
+
+    // width: 100%;
+    //第一种类型
+    .item_One {
+        width: 100%;
+        background: rgba(249, 149, 0, 0.1);
+        padding: 3px 7px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-radius: 2px;
+        color: #ED8E00;
+        line-height: 13px;
+        font-size: 10px;
+
+        .itemLeft {
+            span:first-child {
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .itemRight {
+            margin-left: 7px;
+        }
+    }
+
+    //第二种
+    .item_Two {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .btnItem {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 0 5px 0 7px;
+            background: rgba(19, 222, 137, 0.1);
+            border-radius: 2px;
+            height: 24px;
+            line-height: 13px;
+            margin-right: 5px;
+
+            .itemLeft {
+                span:first-child {
+                    position: relative;
+                    top: 1px;
+                }
+            }
+
+            .itemRight {
+                margin-left: 7px;
+            }
+        }
+    }
+
+    //第三种类型
+    .item_Three {
+        background: rgba(255, 0, 0, 0.1);
+        padding: 3px 7px;
+        display: flex;
+        border-radius: 2px;
+        justify-content: flex-start;
+        align-items: center;
+        color: #FF0000;
+        line-height: 13px;
+        font-size: 10px;
+
+        .itemLeft {
+            span:first-child {
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .itemRight {
+            margin-left: 7px;
+        }
+    }
+
+    //第四种
+    .item_Four {
+        background: rgba(0, 0, 0, 0.05);
+        padding: 3px 7px;
+        display: flex;
+        border-radius: 2px;
+        justify-content: flex-start;
+        align-items: center;
+        color: #000000;
+        line-height: 13px;
+        font-size: 10px;
+
+        .itemLeft {
+            span:first-child {
+                position: relative;
+                top: 1px;
+            }
+        }
+
+        .itemRight {
+            margin-left: 7px;
+        }
+    }
+
+    //第五种
+    .item_Five {
+        background: rgba(0, 0, 0, 0.05);
+        border-radius: 2px;
+        padding: 0px 7px;
+        line-height: 24px;
+        color: rgba(0, 0, 0, 0.5);
+        height: 24px;
+    }
+}
+
+
+
+
+//StylesFolderPublic 公用布局
+.StylesFolderPublic {
+    .contentBox {
+        min-width: calc(100vw - 112px);
+        overflow-y: auto;
+        padding: 0 16px;
+        min-height: 200px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: top;
+
+        .leftBox {
+            width: 74.5%;
+            background-color: #fff;
+            margin-right: 20px;
+            padding: 30px 20px;
+
+
+        }
+
+        .rightBox {
+            flex: 1;
+
+            .topBox {
+                background-color: #fff;
+                margin-bottom: 20px;
+                min-height: 324px;
+
+            }
+
+            .bottomBox {
+                background-color: #fff;
+                min-height: 400px;
+            }
+        }
+    }
+}
+
+//StyleOverview 
+.StyleOverview {
+
+    .contentBox {
+        .leftBox {
+            .topBox {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+
+                .dwBtn {
+                    position: absolute;
+                    bottom: 15px;
+                }
+            }
+
+            .rightTab {
+                flex: 1;
+                margin-left: 12px;
+
+                .title {
+                    font-weight: 500;
+                    font-size: 24px;
+                    line-height: 32px;
+                    /* identical to box height */
+                    background-color: rgb(220, 255, 77);
+                    display: inline-block;
+                    font-family: Poppins;
+                    text-transform: uppercase;
+                    margin-bottom: 30px;
+                }
+
+                .btnList {
+                    &>div:first-child {
+                        margin-right: 10px;
+                    }
+                }
+
+                .tableList {
+                    display: flex;
+                    justify-content: space-between;
+
+                    .leftTable {
+                        flex: 1;
+                        margin-right: 32px;
+                    }
+
+                    .rightTable {
+                        flex: 1;
+                    }
+                }
+            }
+
+            .bottomBox {
+                .title {
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 24px;
+                    /* identical to box height */
+                    background-color: rgb(220, 255, 77);
+                    display: inline-block;
+                    font-family: Poppins;
+                    text-transform: uppercase;
+
+                }
+
+                .ImageTitle {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 20px;
+
+                    .rbtnlist {
+                        display: flex;
+                        align-items: center;
+                        line-height: 22px;
+                        box-sizing: border-box;
+
+                    }
+                }
+
+                .ImageUpload,
+                .ImageShow {
+                    margin-right: 20px;
+                }
+
+                .ImageUpload {
+                    //图片上传样式
+                    width: 148px;
+                    background: #fff;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    text-align: center;
+                    padding: 10px 0;
+                    // height: 155px;
+                    border: 1px dashed #000000;
+                    border-radius: 2px;
+                    transition: 0.3s;
+
+                    &:hover {
+                        border-color: rgb(0, 163, 255);
+                        transition: 0.3s;
+                    }
+
+                    .uploadIcon {
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                    }
+
+                    .btnStyle1 {
+                        font-style: italic;
+                        font-weight: 500;
+                        font-size: 8px;
+                        line-height: 11px;
+                        padding: 0 2px;
+                        color: rgba(0, 0, 0, 0.5);
+                    }
+
+                }
+
+                .ImageOpenArchives {
+                    //图片开放档案样式
+                    width: 150px;
+                    background: rgba(0, 0, 0, 0.05);
+                    border-radius: 4px;
+                    text-align: center;
+                    padding: 10px 0;
+
+                    .uploadIcon {
+                        margin-top: 20px;
+                        margin-bottom: 35px;
+                    }
+                }
+
+                .ImageShow {
+                    width: 150px;
+                    background: #FFFFFF;
+                    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+                    border-radius: 4px;
+
+                    .ImageTop {
+                        margin-bottom: 4px;
+                    }
+
+                    .ImageBottom {
+                        padding: 5px 7px;
+
+                        .titleList {
+                            font-size: 12px;
+                            display: flex;
+                            line-height: 16px;
+
+                            align-items: center;
+                            font-weight: 500;
+                            justify-content: space-between;
+
+                            .xxIcon {
+                                padding: 0px 2px 2px;
+                            }
+
+                            .xxIcon:hover {
+                                background-color: #CCFF00;
+
+                                cursor: pointer;
+                            }
+
+                        }
+
+                        .textSm {
+                            font-size: 8px;
+                            color: rgba(0, 0, 0, 0.5);
+                        }
+                    }
+                }
+
+                .unionList {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+
+                    .SketchDesign {
+                        flex: 1;
+
+                        &:first-child {
+                            margin-right: 20px;
+                        }
+                    }
+
+                }
+
+                .newBoxBottom {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: flex-start;
+
+                    .MATERIALS {
+                        flex: 1;
+                        margin-right: 20px;
+                        padding: 15px 20px;
+
+                        .tableBtn {
+                            color: #fff;
+                            background-color: #000;
+                            padding: 5px 8px;
+                            text-align: center;
+                            border-radius: 2px;
+                            font-size: 12px;
+                        }
+                    }
+
+                    .FILES {
+                        flex: 1;
+                        padding: 15px 20px;
+
+                        .itemBtnList {
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+                            margin-bottom: 25px;
+                            margin-top: 26px;
+
+                            &>div:first-child {
+                                width: 130px;
+                                // background-color: #f00;
+                                text-align: right;
+                            }
+
+                        }
+                    }
+                }
+
+                .SketchDesign {
+                    border: 1px solid rgb(204, 204, 204);
+                    border-radius: 6px;
+                    padding: 15px 20px;
+                    margin-top: 20px;
+
+                    .ImageList {
+                        display: flex;
+                        justify-content: flex-start;
+
+                    }
+                }
+            }
+        }
+
+        .rightBox {
+            .title {
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 24px;
+                /* identical to box height */
+                background-color: rgb(220, 255, 77);
+                display: inline-block;
+                font-family: Poppins;
+                text-transform: uppercase;
+                margin-bottom: 20px;
+
+            }
+
+            .topBox,
+            .bottomBox {
+                padding: 20px;
+
+                //  height: 324px;
+                //  overflow-y: auto;
+                .titleBox {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                }
+
+                .cardList {
+                    max-height: 240px;
+                    overflow-y: auto;
+                }
+
+                .RightCard,
+                .RightBottomCard {
+                    background-color: #f00;
+                    padding: 10px;
+                    border-radius: 2px;
+                    margin-bottom: 10px;
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+
+                    .topText {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        margin-bottom: 6px;
+
+                        .leftText {
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            .iconText {
+                                margin-right: 5px;
+
+                                .IconItem {
+                                    margin-right: 5px;
+                                    width: 18px;
+                                    padding: 0px;
+                                    height: 18px;
+                                    border-radius: 20px;
+                                    text-align: center;
+                                    font-size: 10px;
+                                    color: #fff;
+                                }
+                            }
+
+                            .titleText {
+                                font-size: 12px;
+                                line-height: 16px;
+                                letter-spacing: 0.05em;
+                                display: flex;
+                                justify-content: flex-start;
+                                align-items: center;
+
+                                .iconName {
+                                    margin-left: 5px;
+                                    border: 1px solid #00A3FF;
+                                    border-radius: 2px;
+                                    padding: 0px 5px;
+                                    text-align: center;
+                                    font-weight: 500;
+
+                                }
+                            }
+                        }
+
+                        .rightText {
+                            font-weight: 500;
+                            font-size: 10px;
+                            line-height: 13px;
+                            color: rgba(0, 0, 0, 0.5);
+                            display: flex;
+                            justify-content: flex-end;
+                            align-items: center;
+                        }
+                    }
+
+                    .bottomText {
+                        padding-left: 25px;
+                        font-size: 12px;
+
+                    }
+
+                    .replyText {
+                        width: 100%;
+                        text-align: center;
+                        padding: 6px 0;
+                        margin-top: 10px;
+                        font-size: 11px;
+                        line-height: 15px;
+                        // border: 1px solid #f00;
+                        border-radius: 2px;
+                        box-sizing: border-box;
+                        cursor: pointer;
+                    }
+
+                    .lookMore {
+                        display: flex;
+                        font-style: italic;
+                        margin: 12.5px 0 0;
+                        cursor: pointer;
+                        font-weight: 500;
+                        font-size: 11px;
+                        line-height: 15px;
+                        color: rgb(121, 121, 121);
+                        align-items: center;
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .bottomBox {
+                .cardList {
+                    max-height: 424px;
+                    // height: 424px;
+                }
+            }
+
+            .hfText {
+
+                // margin-top: -38px;
+                .head {
+                    padding: 10px 5px;
+                    border: 1px solid rgb(217, 217, 217);
+                    border-bottom: 0;
+                    border-top-left-radius: 2px;
+                    border-top-right-radius: 2px;
+
+
+                    .leftText {
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: center;
+
+                        .titleText {
+                            font-size: 12px;
+                            line-height: 16px;
+                            letter-spacing: 0.05em;
+                            display: flex;
+                            justify-content: flex-start;
+                            align-items: center;
+
+                            .iconName {
+                                margin-left: 5px;
+                                border: 1px solid #00A3FF;
+                                border-radius: 2px;
+                                padding: 0px 5px;
+                                text-align: center;
+                                font-weight: 500;
+
+                            }
+                        }
+
+                        .iconText {
+                            margin-right: 5px;
+
+                            .IconItem {
+                                margin-right: 5px;
+                                width: 18px;
+                                padding: 0px;
+                                height: 18px;
+                                border-radius: 20px;
+                                text-align: center;
+                                font-size: 10px;
+                                color: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .bottomBox {
+                padding: 20px;
+            }
+        }
+    }
+
+    .Icontext {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        .leftContent {
+            display: flex;
+            font-size: 12px;
+            width: 100%;
+            // justify-content: space-between;
+            align-items: center;
+
+            .valueText {
+                display: flex;
+                position: relative;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+
+                // width: 90%;
+                .isBtn {
+                    margin-right: 10px;
+                }
+
+                .isTime {
+                    font-style: normal;
+                    color: rgba(0, 0, 0, 0.5);
+                    font-weight: 500;
+                    font-size: 10px;
+                    line-height: 13px;
+                }
+            }
+
+            .IconItem {
+                margin-right: 5px;
+                width: 18px;
+                padding: 0px;
+                height: 18px;
+                border-radius: 20px;
+                text-align: center;
+                font-size: 10px;
+                color: #fff;
+                letter-spacing: -0.5px;
+            }
+        }
+    }
+}
+
+.xlList {
+
+    .itemXl {
+        display: flex;
+        justify-content: flex-start;
+        cursor: pointer;
+        align-items: center;
+        color: #000;
+        height: 40px;
+        border-bottom: 1px solid rgb(230, 230, 230);
+        padding: 0 5px;
+
+        .iconOther1 {
+            display: none;
+        }
+
+        .iconOther,
+        .iconOther1 {
+            margin-right: 10px;
+            position: relative;
+            top: 2px;
+        }
+
+        &:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        &:hover>.iconOther {
+            display: none;
+        }
+
+        &:hover>.iconOther1 {
+            display: block;
+        }
+
+        &:last-child {
+            border: 0;
+        }
+    }
+}
+
+
+//英文首字母生成Icon
+.InitialsIcon {
+
+    margin-right: 5px;
+    width: 18px;
+    padding: 0px;
+    height: 18px;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 10px;
+    color: #fff;
+    letter-spacing: -0.5px;
+
+}
+
+//图片放大组件
+.ImageBigLook {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    min-height: 100vh;
+    max-height: 100vh;
+    overflow-y: auto;
+
+    // overflow-y: hidden;
+    &>div:first-child {
+        position: absolute;
+        right: 30px;
+        top: 30px;
+        cursor: pointer;
+    }
+
+    .ImageBox {
+        // max-height: 65%;
+        max-width: 45%;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        // max-height: 100vh;
+        transform: translate(-50%, -50%);
+
+    }
+
+}
+
+
+//新增左侧筛选弹出框
+.Filters {
+    position: fixed;
+    width: 408px;
+    height: 100vh;
+    top: 0;
+    right: 0;
+    background: #FFFFFF;
+    box-shadow: -10px 0px 20px rgba(0, 0, 0, 0.25);
+    z-index: 1;
+    overflow-y: auto;
+    padding: 20px 30px;
+
+    .backOf {
+        // text-align: right;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        cursor: pointer;
+
+        // line-height: 30px;
+        &>div:first-child {
+            margin-right: 10px;
+            text-decoration: underline;
+            font-weight: 500;
+            font-size: 12px;
+            line-height: 16px;
+            /* identical to box height */
+            letter-spacing: 0.05em;
+            color: rgba(0, 0, 0, 0.7);
+
+        }
+    }
+
+    .btnList {
+        display: flex;
+        justify-content: space-between;
+        margin: 68px 0 70px;
+    }
+
+    .itemBox {
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+    }
+}
+
+
+.QuickView {
+    width: 100%;
+    max-height: 60vh;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .TitleBox {
+        margin-bottom: 10px;
+
+        .top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+
+            .title {
+                font-size: 18px;
+                font-weight: bold;
+            }
+
+            .btnList {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+        }
+
+        .bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: rgb(118, 118, 118);
+        }
+    }
+
+    .leftDemo {
+        width: 400px;
+        // flex: 1;
+        // border-right: 1px solid #000;
+        background-color: #fff;
+        // height: 100%;
+        padding: 20px;
+        // height: 100vh;
+    }
+
+    .rightDemo {
+        // width: 850px;
+        flex: 1;
+        margin-left: 20px;
+        background-color: #fff;
+        // height: 100%;
+        height: 60vh;
+
+        position: relative;
+        padding: 20px;
+
+        .dwBox {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+
+            .btnList {
+                display: flex;
+                width: 100%;
+                height: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+
+        }
+
+        .leftImgList {
+            width: 55%;
+            height: 100%;
+            display: flex;
+            padding: 0 50px;
+            text-align: center;
+
+            // padding: 20px;
+            // background-color: #f00;
+            div {
+                width: 100%;
+                height: 100%;
+                margin: 0 10px;
+
+                img {
+                    // height: 100%;
+                    max-width: 100%;
+                    max-height: 80vh;
+                }
+            }
+
+        }
+
+        .table {
+            flex: 1;
+            padding: 0 20px;
+
+            // height: 500px;
+            // background-color: yellow;
+            .tableList {}
+        }
+    }
+}
+
+
+
+.Cover {
+
+    .title {
+        font-weight: 500;
+        font-size: 24px;
+        line-height: 32px;
+        margin-bottom: 20px;
+        /* identical to box height */
+
+
+        color: #000000;
+    }
+
+    .contentBox {
+        display: flex;
+        justify-content: space-between;
+
+        .itemInput {
+            margin-bottom: 10px;
+        }
+
+        // align-items: fkl;
+        .left {
+            width: 30%;
+            margin-right: 20px;
+            background-color: #fff;
+
+            .btTitle {
+                font-family: 'Times New Roman';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 20px;
+                line-height: 23px;
+                /* identical to box height */
+                color: #000000;
+                margin-bottom: 15px;
+            }
+
+            .listBox {
+                .OneBox {
+                    display: flex;
+                    justify-content: baseline;
+                    align-items: center;
+                    margin-bottom: 20px;
+
+                    .itemBox {
+                        width: 30%;
+                    }
+                }
+            }
+        }
+
+        .right {
+            flex: 1;
+            border: 1px solid rgb(196, 196, 196);
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+
+            .bottomBox {
+                line-height: 65vh;
+                text-align: center;
+                font-size: 14px;
+                color: rgb(196, 196, 196);
+            }
+
+
+            .endBtn {
+                position: absolute;
+                bottom: 20px;
+                right: 20px;
+                transition: .4s;
+            }
+
+            .endMove {
+                right: 100px;
+                transition: .4s;
+            }
+
+            .saveBtn {
+                bottom: 20px;
+                right: -100px;
+                line-height: 23px;
+                transition: .4s;
+                position: absolute;
+            }
+
+            .saveMove {
+                right: 20px;
+                transition: .4s;
+            }
+        }
+    }
+}
+
+.AliceFrock {
+
+    width: calc(100vw - 400px);
+
+    .contentBox {
+        .topBox {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .btnList {
+                display: flex;
+            }
+
+            .title {
+                font-style: normal;
+                font-weight: 500;
+                font-size: 32px;
+                line-height: 42px;
+            }
+        }
+
+        .briefBox {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 19px;
+            margin-top: 10px;
+
+            .tsColor {
+                color: rgba(0, 0, 0, 0.5);
+            }
+
+            .tsColor1 {
+                margin: 0 10px;
+            }
+
+            .IconText {
+                font-weight: 500;
+                font-size: 11px;
+                line-height: 15px;
+                /* identical to box height */
+                letter-spacing: 0.05em;
+                color: rgba(0, 0, 0, 0.7);
+
+                .myIcon {
+                    width: 18px;
+                    height: 18px;
+                    background-color: #f00;
+                    color: #fff;
+                    border-radius: 50%;
+                    font-size: 11px;
+                    display: inline-block;
+                    line-height: 18px;
+                    text-align: center;
+                    margin-right: 5px;
+                    letter-spacing: -0.05em;
+                }
+            }
+        }
+
+        .fgLine {
+            width: 100%;
+            height: 3px;
+            background-color: rgba(0, 0, 0, .3);
+            margin: 20px 0 28px;
+        }
+
+        .topshopBox {
+            width: 100%;
+
+            .topTabBox {
+                margin-bottom: 60px;
+                padding: 20px;
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                background: #ffffff;
+                box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.25);
+                border-radius: 0px 0px 4px 4px;
+
+                .left {
+                    width: 30%;
+                }
+
+                .right {
+                    flex: 1;
+
+                    .topBox {
+                        display: flex;
+                        justify-content: space-between;
+                        // align-items: center;
+
+                        .tabLeft {
+                            width: 49%;
+                            margin-right: 7px;
+                        }
+
+                        .tabRight {
+                            flex: 1;
+                        }
+                    }
+
+                    .tabBottom {
+                        width: 100%;
+                        text-align: center;
+                        margin-top: 20px;
+                        padding: 15px 10px;
+                        gap: 10px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        font-style: italic;
+                        font-weight: 500;
+                        font-size: 14px;
+                        line-height: 19px;
+                        /* identical to box height */
+
+                        // text-align: right;
+
+                        color: rgba(0, 0, 0, 0.5);
+                        background: #F5F5F5;
+                        border: 1px dashed rgba(0, 0, 0, 0.5);
+                    }
+
+                }
+            }
+        }
+
+        // .shopBoxList {
+        //     margin-bottom: 80px;
+
+        //     &:first-child {
+        //         margin-top: 0px;
+        //     }
+
+        //     .shopBoxListBox {
+        //         display: flex;
+        //         align-items: flex-start;
+
+        //         .ItemBox {
+        //             width: 24%;
+        //             min-height: 100px;
+        //             // background-color: #f00;
+        //             padding: 10px;
+        //             margin-right: 1.3%;
+        //             background-color: #fff;
+
+        //             &:last-child {
+        //                 margin-right: 0;
+        //             }
+
+        //             .bottomBox {
+        //                 display: flex;
+        //                 align-items: center;
+
+        //                 .left {
+        //                     margin-right: 10px;
+        //                 }
+
+        //                 .right {
+        //                     flex: 1;
+
+        //                     .titleBox {
+        //                         display: flex;
+        //                         font-weight: 500;
+        //                         font-size: 12px;
+        //                         line-height: 16px;
+        //                         align-items: center;
+        //                         justify-content: space-between;
+        //                     }
+
+        //                     .textBox {
+        //                         font-size: 10px;
+        //                         line-height: 13px;
+        //                         color: rgba(0, 0, 0, 0.5);
+
+        //                         .myIcon {
+        //                             width: 18px;
+        //                             height: 18px;
+        //                             background-color: #f00;
+        //                             color: #fff;
+        //                             border-radius: 50%;
+        //                             font-size: 11px;
+        //                             display: inline-block;
+        //                             line-height: 18px;
+        //                             text-align: center;
+        //                             margin: 0 5px;
+
+        //                             letter-spacing: -0.05em;
+        //                         }
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //     }
+
+        //     .ShopBoxItemTitle {
+        //         display: flex;
+        //         justify-content: space-between;
+        //         margin-bottom: 17.5px;
+        //         align-items: center;
+        //         border-bottom: 2px solidrgba(0, 0, 0, 0.2);
+        //         box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+
+        //         .right {
+        //             display: flex;
+        //             // justify-content: space-between;
+        //             align-items: center;
+        //         }
+
+        //         .left {
+        //             display: flex;
+        //             align-items: center;
+
+        //             .textColor {
+        //                 font-weight: 500;
+        //                 margin: 0 10px;
+        //                 font-size: 20px;
+        //                 line-height: 27px;
+        //                 /* identical to box height */
+
+        //                 text-transform: uppercase;
+        //                 background: rgba(204, 255, 0, 0.7);
+        //             }
+
+        //             .textBox {
+        //                 width: 30px;
+        //                 height: 30px;
+        //                 text-align: center;
+        //                 line-height: 30px;
+        //                 font-size: 16px;
+        //                 background-color: #000;
+        //                 color: #fff;
+        //             }
+
+        //             .fyText {
+        //                 margin: 0 10px 0 50px;
+        //                 font-size: 14px;
+        //                 line-height: 16px;
+        //                 /* identical to box height, or 114% */
+
+
+        //                 color: rgba(0, 0, 0, 0.7);
+        //             }
+        //         }
+        //     }
+        // }
+
+        .bottomListBox {
+            display: flex;
+            justify-content: space-between;
+
+            .leftItem {
+                width: 49%;
+                margin-right: 2%;
+            }
+
+            .rightItem {
+                width: 49%;
+
+                .CardBox {
+                    background-color: #fff;
+                    padding: 10px;
+                    border-radius: 4px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+
+                    .left {
+                        display: flex;
+                        align-items: center;
+
+                        .leftImg {
+                            margin-right: 10px;
+                        }
+
+                        .leftText {
+                            .top {
+                                font-family: 'Times New Roman';
+                                font-style: normal;
+                                font-weight: 400;
+                                font-size: 14px;
+                                line-height: 16px;
+                            }
+
+                            .bottom {
+                                .rightText {
+                                    font-weight: 500;
+                                    font-size: 10px;
+                                    line-height: 13px;
+                                    letter-spacing: 0.05em;
+
+                                    color: rgba(0, 0, 0, 0.7);
+                                }
+
+                                .colorText {
+                                    width: 18px;
+                                    height: 18px;
+                                    background-color: #f00;
+                                    color: #fff;
+                                    border-radius: 50%;
+                                    font-size: 11px;
+                                    display: inline-block;
+                                    line-height: 18px;
+                                    text-align: center;
+                                    margin-right: 5px;
+                                    letter-spacing: -0.05em;
+                                }
+
+                                &>span:first-child {
+                                    font-style: italic;
+                                    font-size: 10px;
+                                    line-height: 13px;
+                                    text-align: right;
+
+                                    color: rgba(0, 0, 0, 0.5);
+                                }
+                            }
+                        }
+                    }
+
+                    .right {
+                        display: flex;
+                        align-items: center;
+                    }
+                }
+            }
+
+            .ShopBoxItemTitle {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+                align-items: center;
+                width: 100%;
+                padding-bottom: 8px;
+                box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+
+                .right {
+                    display: flex;
+                    // justify-content: space-between;
+                    align-items: center;
+                }
+
+                .left {
+                    display: flex;
+                    align-items: center;
+
+                    .textColor {
+                        font-weight: 500;
+                        margin: 0 10px;
+                        font-size: 20px;
+                        line-height: 27px;
+                        /* identical to box height */
+
+                        text-transform: uppercase;
+                        background: rgba(204, 255, 0, 0.7);
+                    }
+
+                    .textBox {
+                        width: 30px;
+                        height: 30px;
+                        text-align: center;
+                        line-height: 30px;
+                        font-size: 16px;
+                        background-color: #000;
+                        color: #fff;
+                    }
+
+                    .fyText {
+                        margin: 0 10px 0 50px;
+                        font-size: 14px;
+                        line-height: 16px;
+                        /* identical to box height, or 114% */
+
+
+                        color: rgba(0, 0, 0, 0.7);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.menuList {
+    margin-top: 60px;
+    display: flex;
+
+}
+
+.leftIcon {
+    display: flex;
+    justify-content: center;
+
+}
+
+.newBlock {
+    display: flex;
+
+    .newBlockInput {
+        margin-bottom: 80px;
+        padding-left: 18px;
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: 6px center;
+        background-size: 24px 24px;
+
+
+        .btn {
+            top: 4px;
+            right: 0;
+            display: flex;
+            position: absolute;
+        }
+    }
+}
+
+.tableBox {
+    margin-Bottom: 80px;
+
+    .titleBox {
+        padding-left: 6px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        position: relative;
+        // background-repeat: no-repeat;
+        // background-position: left center;
+        // background-size: 24px 24px;
+
+        .addBtn {
+            top: 0;
+            right: 0;
+            cursor: pointer;
+            padding: 5px 20px;
+            position: absolute;
+            border: 1px solid #000000;
+            border-radius: 4px;
+        }
+
+        .title {
+            margin-left: 6px;
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 32px;
+            background-color: rgb(220, 255, 77);
+            display: inline-block;
+            font-family: Poppins;
+            text-transform: uppercase;
+
+        }
+
+        .count {
+            margin-left: 10px;
+            width: 32px;
+            height: 32px;
+            font-size: 16pX;
+            line-height: 32px;
+            color: #ffffff;
+            text-align: center;
+            background: #000000;
+        }
+
+    }
+
+}
+
+
+.dropDownBox {
+    position: relative;
+
+    .dropDownClick {
+        bottom: -101px;
+        right: 0;
+        width: 101px;
+        height: auto;
+        position: absolute;
+        transition: .4s;
+        z-index: 9;
+        border-bottom: 1px solid rgba(0, 0, 0, .1);
+
+        div {
+            height: 50px;
+            cursor: pointer;
+            line-height: 50px;
+            text-indent: 10px;
+            position: relative;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, .1);
+            border-bottom: none;
+
+            img {
+                top: 17px;
+                right: 15px;
+                width: 16px;
+                height: 16px;
+                position: absolute;
+            }
+        }
+    }
+}
+
+
+.commentsBox {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    .commentsCilckBox {
+        top: 68px;
+        right: -2px;
+        width: 340px;
+        height: auto;
+        z-index: 99999;
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        background: #292929;
+
+        .infoCtn {
+            display: flex;
+            flex-direction: column;
+
+            .infoBox {
+                padding: 10px 20px;
+                display: flex;
+                flex-direction: column;
+                border-bottom: 1px solid rgba(255, 255, 255, .5);
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    .userAndTime {
+                        display: flex;
+                        align-items: center;
+
+                        span {
+                            width: 18px;
+                            height: 18px;
+                            justify-content: center;
+                            color: #ffffff;
+                            display: flex;
+                            align-items: center;
+                            font-size: 12px;
+                            line-height: 18px;
+                            border-radius: 100%;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+
+                        p {
+                            margin: 0;
+                            margin-left: 5px;
+                            color: #ffffff;
+                        }
+
+                        .time {
+                            color: rgba(255, 255, 255, .5);
+                        }
+
+
+                    }
+
+                }
+
+
+                .content {
+                    margin: 0;
+                    margin-top: 10px;
+                    font-size: 14px;
+                    line-height: 22px;
+                    color: rgba(255, 255, 255, .5);
+                }
+            }
+        }
+
+
+        .post {
+            padding: 10px 20px;
+            width: 100%;
+            background: #000000;
+
+            .user {
+                display: flex;
+                align-items: center;
+
+                span {
+                    width: 18px;
+                    height: 18px;
+                    font-size: 12px;
+                    color: #ffffff;
+                    display: block;
+                    line-height: 18px;
+                    text-align: center;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 100%;
+                }
+
+                p {
+                    margin: 0;
+                    margin-left: 5px;
+                    color: #ffffff;
+                }
+
+
+
+
+
+            }
+
+            .btns {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                .btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 34px;
+                    height: 34px;
+                    cursor: pointer;
+                    background: rgba(204, 255, 0, 0.2);
+                    border-radius: 2px;
+                }
+
+                .send {
+
+                    padding: 10px;
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    background: #000000;
+                    border: 1px solid #CCFF00;
+
+                    p {
+                        margin: 0;
+                        margin-right: 10px;
+                        color: #ffffff;
+                        font-size: 14px;
+                        line-height: 16px;
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+
+
+.modalBox {
+    display: flex;
+
+
+    .info {
+        padding: 0 30px;
+
+        h3 {
+            font-size: 24px;
+            font-family: via_Futura_700;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 20px;
+            font-family: 'Times New Roman';
+        }
+
+        h4 {
+            font-size: 12px;
+            line-height: 16px;
+            color: rgba(0, 0, 0, .5);
+            font-family: Poppins;
+
+            span {
+                color: #000000;
+                cursor: pointer;
+            }
+        }
+
+        .btn {
+            padding: 0 10px;
+            width: 150px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #ffffff;
+            background: #000000;
+            border-radius: 4px;
+        }
+    }
+}
+
+.addModalBox {
+    padding-bottom: 60px;
+
+    .title {
+        text-align: center;
+
+        h3 {
+            font-family: Poppins;
+            font-size: 24px;
+            line-height: 32px;
+            color: #000000;
+            display: inline-block;
+            background-color: #CCFF00;
+        }
+    }
+
+    .tit {
+        margin-top: 40px;
+        font-size: 20px;
+        line-height: 24px;
+        font-family: 'Times New Roman';
+    }
+
+    .search {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .btn {
+            width: 154px;
+            height: 40px;
+            cursor: pointer;
+            line-height: 40px;
+            text-align: center;
+            color: #ffffff;
+            background: #000000;
+            border-radius: 2px;
+        }
+    }
+
+    .library {
+        margin-top: 20px;
+
+        h4 {
+            font-size: 12px;
+            line-height: 16px;
+            font-family: Poppins;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .ctn {
+            display: flex;
+            align-items: center;
+
+            .box {
+                padding: 10px;
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    .category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+
+
+}
+
+
+
+
+.shopBoxList {
+    margin-bottom: 80px;
+
+    .shopBoxListBox {
+
+        .ItemBox {
+            width: 100%;
+            padding: 10px;
+            margin-right: 1.3%;
+            background-color: #fff;
+
+            .bottomBox {
+                padding-top: 10px;
+                display: flex;
+                align-items: center;
+
+                .left {
+                    margin-right: 10px;
+                    display: flex;
+                    align-items: center;
+                }
+
+                .right {
+                    flex: 1;
+
+                    .titleBox {
+                        display: flex;
+                        font-weight: 500;
+                        font-size: 12px;
+                        line-height: 16px;
+                        align-items: center;
+                        justify-content: space-between;
+                    }
+
+                    .textBox {
+                        font-size: 10px;
+                        line-height: 13px;
+                        color: rgba(0, 0, 0, 0.5);
+
+                        .myIcon {
+                            width: 18px;
+                            height: 18px;
+                            background-color: #f00;
+                            color: #fff;
+                            border-radius: 50%;
+                            font-size: 11px;
+                            display: inline-block;
+                            line-height: 18px;
+                            text-align: center;
+                            margin: 0 5px;
+
+                            letter-spacing: -0.05em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ShopBoxItemTitle {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 17.5px;
+        padding-bottom: 10px;
+        align-items: center;
+        border-bottom: 2px solidrgba(0, 0, 0, 0.2);
+        box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2);
+
+        .right {
+            display: flex;
+            // justify-content: space-between;
+            align-items: center;
+        }
+
+        .left {
+            display: flex;
+            align-items: center;
+
+            .textColor {
+                font-weight: 500;
+                margin: 0 10px;
+                font-size: 20px;
+                line-height: 27px;
+                /* identical to box height */
+
+                text-transform: uppercase;
+                background: rgba(204, 255, 0, 0.7);
+            }
+
+            .textBox {
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                line-height: 30px;
+                font-size: 16px;
+                background-color: #000;
+                color: #fff;
+            }
+
+            .fyText {
+                margin: 0 10px 0 50px;
+                font-size: 14px;
+                line-height: 16px;
+                /* identical to box height, or 114% */
+                color: rgba(0, 0, 0, 0.7);
+            }
+
+            .swiperBtn {
+                width: 42px;
+                height: 42px;
+                display: flex;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                border-radius: 100%;
+            }
+
+        }
+    }
+}
+
+.ItemBoxBig {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .leftBox {
+        width: 50%;
+        display: flex;
+        align-items: center;
+        background: red;
+    }
+
+    .rightBox {
+        width: 50%;
+        background: blue;
+    }
+}
