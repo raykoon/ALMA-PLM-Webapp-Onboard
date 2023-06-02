@@ -1,16 +1,51 @@
 .rightBoxCtn {
-  padding: 50px 0;
+  // padding: 50px 0;
   z-index: 200;
-
+.nextImage{
+  margin: 10px 10px 0px 90%;
+  cursor: pointer;
+}
+.titleTab{
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+}
+.titleColumn{
+  display: flex;
+  flex-direction: column;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+    span:nth-child(2){
+      color: #737373;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: left;
+    }
+}
   .titleBox {
-    padding: 0 20px;
-    margin-bottom: 50px;
+    // padding: 0 20px 0 20px;
+    // margin-bottom: 50px;
 
     .title {
       width: 360px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 0 20px 0 20px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 18px;
+      line-height: 28px;
 
       .backBtn {
         cursor: pointer;
@@ -39,7 +74,7 @@
 
     .info {
       margin-top: 35px;
-      padding-bottom: 10px;
+      padding: 0px 10px 10px 15px;
       display: flex;
       align-items: center;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -63,8 +98,9 @@
         height: 18px;
         text-align: center;
         border-radius: 50%;
+        font-size: 8px;
         color: #fff;
-        background-color: #f00;
+        background-color: #1570EF;
         line-height: 18px;
 
       }
@@ -623,20 +659,30 @@
     }
 
     .internalChatCtn {
-      margin: 0 auto;
-      width: 363px;
+      // margin: 0 auto;
+      // width: 363px;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-
+      ::-webkit-scrollbar{
+        width: 8px;
+        height: 176px;
+      }
+      ::-webkit-scrollbar-thumb{
+        background:#D6D6D6 ;
+      }
+      ::-webkit-scrollbar-track{
+        border-radius: 8px;
+        background: #F5F5F5;
+      }
       .box {
-        margin-bottom: 10px;
-        padding: 10px;
-        width: 359px;
-        // height: 147px;
-        border-radius: 4px;
-        border: 1px solid rgba(0, 0, 0, .2);
-        position: relative;
+        // margin-bottom: 10px;
+        // padding: 10px;
+        // width: 359px;
+        // // height: 147px;
+        // border-radius: 4px;
+        // border: 1px solid rgba(0, 0, 0, .2);
+        // position: relative;
 
 
         .time {
@@ -659,10 +705,10 @@
         }
 
         .user {
-          margin-top: 5px;
+          // margin-top: 5px;
           display: flex;
           align-items: center;
-
+          
 
           span {
             width: 18px;
@@ -679,20 +725,48 @@
           p {
             margin: 0;
             margin-left: 10px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
           }
         }
 
-        .content {
+        .contentOneSelf {
+          margin-left: auto;
+          width: 260px;
           margin-top: 5px;
           text-align: left;
           min-height: 60px;
 
           p {
-            margin: 0;
+          margin-top: 6px;
+          padding: 10px 14px;
+          background: #000000;
+          border-radius: 8px 0px 8px 8px;
+          color: #ffffff !important;
+          margin: 0;
+          }
+        }
+
+        .contentOther {
+          width: 260px;
+          margin: 5px 0 0 60px;
+          text-align: left;
+          min-height: 60px;
+
+          p {
+          margin-top: 6px;
+          padding: 10px 14px;
+          background: #F5F5F5;
+          border-radius: 0px 8px 8px 8px;
+          margin: 0;
           }
         }
 
         .bottomText {
+          display: none;
           margin: 0;
           margin-top: 5px;
           text-align: right;

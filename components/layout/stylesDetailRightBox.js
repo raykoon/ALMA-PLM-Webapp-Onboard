@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import { Select, message, Spin, Skeleton, Input, Form, Mentions } from 'antd';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
 import styles from './stylesDetail.module.scss';
 import NextImage from 'next/image';
 import newIcon65 from '../../public/images/newIcon65.png';
@@ -32,6 +33,7 @@ import { API_STATUS } from '../../utils/statusCode';
 import useWebSocket from '../../utils/websocket';
 import { context } from '../../pages/_app';
 import TimeMethod from '../../utils/timeMethod';
+import title1 from '../../public/images/internal/title1.png'
 
 import {
   chatDataList,
@@ -48,6 +50,7 @@ import {
   icon_rightMenu5,
 } from './svgPath';
 import Item from 'antd/lib/list/Item';
+import { rotate } from 'mathjs';
 
 const ImgShow = ({ data, src = '', resKeyToUrl }) => {
   const [url, setUrl] = useState('');
@@ -93,7 +96,7 @@ const ImgShow = ({ data, src = '', resKeyToUrl }) => {
   );
 };
 
-const ChatSend = ({ info, themeMode, setChartList, teamList }) => {
+const ChatSend = ({ info, themeMode, setChartList, teamList, scrollToBottom }) => {
   const [value, setValue] = useState('');
   const [teamListCopy, setTeamListCopy] = useState([]);
   useEffect(() => {
@@ -128,7 +131,7 @@ const ChatSend = ({ info, themeMode, setChartList, teamList }) => {
   ];
 
   return (
-    <div style={{ position: 'relative', marginTop: '30px' }}>
+    <div style={{ paddingTop: '10px', borderTop: '1px solid #ccc', position: 'fixed', bottom: '15px', background: '#fff' }}>
       {/* <TextArea
         rows={4}
         placeholder="Type a message..."
@@ -140,102 +143,117 @@ const ChatSend = ({ info, themeMode, setChartList, teamList }) => {
           paddingBottom: '40px',
         }}
       /> */}
-      <Mentions
-        placeholder="Type a message..."
-        style={{
-          width: '100%',
-          textAlign: 'justify',
-        }}
-        value={value}
-        rows={6}
-        onChange={(e) => {
-          setValue(e);
-        }}
-        onSelect={(e) => {
-          console.log(e);
-          let add = value.slice(0, value.length - 1);
-          setValue(add + ` @${e.label} `);
-        }}
+      <div style={{ display: 'flex', justifyContent: 'space-between', padding: '0px 10px 0px 10px', }}>
+        <Mentions
+          placeholder="Message"
+          style={{
+            width: '85%',
+            height: '36px',
+            textAlign: 'justify',
+            fontSize: '16px'
+          }}
+          value={value}
+          rows={6}
+          onChange={(e) => {
+            setValue(e);
+          }}
+          onSelect={(e) => {
+            console.log(e);
+            let add = value.slice(0, value.length - 1);
+            setValue(add + ` @${e.label} `);
+          }}
         // options={teamListCopy}
-      >
-        {teamListCopy?.map((item, index) => {
-          return (
-            <Mentions.Option key={index} value={item.value}>
-              {item.label}
-            </Mentions.Option>
-          );
-        })}
-      </Mentions>
-      <div
-        onClick={() => {
-          console.log('ws', themeMode, info);
-          if (value.match(/^\s+$/) || !value) {
-            setValue();
-            message.info('Cannot send an empty message');
-            return false;
-          }
+        >
+          {teamListCopy?.map((item, index) => {
+            return (
+              <Mentions.Option key={index} value={item.value}>
+                {item.label}
+              </Mentions.Option>
+            );
+          })}
+        </Mentions>
+        <div
+          onClick={() => {
+            scrollToBottom()
+            console.log('ws', themeMode, info);
+            if (value.match(/^\s+$/) || !value) {
+              setValue();
+              message.info('Cannot send an empty message');
+              return false;
+            }
 
-          let options = JSON.stringify({
-            messageType: 'ToTeam',
-            messageFromUser: localStorage.getItem('userId'),
-            messageToUser: info?.teamId,
-            messageUserName: localStorage.getItem('userName'),
-            message: value,
-            timestamp: new Date().getTime(),
-            messageTagUser: 0,
-            messageMedia: 'text',
-            action: 'onlineChat',
-          });
-          themeMode.themeType?.ws?.sendMessage(options).then((res) => {
-            console.log(options);
-            setValue();
+            let options = JSON.stringify({
+              messageType: 'ToTeam',
+              messageFromUser: localStorage.getItem('userId'),
+              messageToUser: info?.teamId,
+              messageUserName: localStorage.getItem('userName'),
+              message: value,
+              timestamp: new Date().getTime(),
+              messageTagUser: 0,
+              messageMedia: 'text',
+              action: 'onlineChat',
+            });
+            themeMode.themeType?.ws?.sendMessage(options).then((res) => {
+              console.log(options);
+              setValue();
 
-            //   if(sessionStorage.getItem('ChatList')){
-            //     let copy=JSON.parse(sessionStorage.getItem('ChatList'))
-            //     copy.push(JSON.parse(options))
-            //     sessionStorage.setItem('ChatList',JSON.stringify(copy))
-            // }else{
-            //   let copy=[]
-            //   copy.push(JSON.parse(options))
-            //   sessionStorage.setItem('ChatList',JSON.stringify(copy))
-            // }
-            console.log(themeMode.themeType);
-          });
-        }}
-        style={{
-          display: 'inline-block',
-          position: 'absolute',
-          right: '10px',
-          bottom: '45px',
-        }}
-      >
-        <IconButton
-          buttonStyle={{
-            padding: '0 20px',
-            height: 36,
-            color: '#fff',
-            fontSize: '16px',
-            background: 'rgba(0, 0, 0, 1)',
-            borderRadius: '2px',
-            fontWeight: '500',
+              //   if(sessionStorage.getItem('ChatList')){
+              //     let copy=JSON.parse(sessionStorage.getItem('ChatList'))
+              //     copy.push(JSON.parse(options))
+              //     sessionStorage.setItem('ChatList',JSON.stringify(copy))
+              // }else{
+              //   let copy=[]
+              //   copy.push(JSON.parse(options))
+              //   sessionStorage.setItem('ChatList',JSON.stringify(copy))
+              // }
+              console.log(themeMode.themeType);
+            });
           }}
-          icon="icon_send1"
-          iconStyle={{
-            color: '#fff',
-            fontSize: 24,
+          style={{
+            width: '44px',
+            height: '44px',
+            display: 'inline-block',
+            // position: 'absolute',
+            // right: '10px',
+            // bottom: '45px',
           }}
-          name={`send`}
-        />
+        >
+          <IconButton
+            buttonStyle={{
+              padding: '0 10px',
+              height: 36,
+              color: '#fff',
+              fontSize: '16px',
+              background: 'rgba(0, 0, 0, 1)',
+              borderRadius: '4px',
+              fontWeight: '500',
+            }}
+            icon="icon_send1"
+            iconStyle={{
+              transform: 'rotate(45deg)',
+              color: '#fff',
+              margin: '0px 0px 3px 3px',
+              fontSize: 20,
+            }}
+          // name={`send`}
+          />
+        </div>
       </div>
+
       <div
         style={{
-          color: 'rgba(0, 0, 0, 0.7)',
-          fontSize: '12px',
-          fontStyle: 'italic',
+          padding: '0px 15px 0px 15px',
+          color: '#737373',
+          fontSize: '14px',
+          fontFamily: 'Poppins',
+          fontStyle: 'normal',
+          fontWeight: '400',
+          fontSize: '14px',
+          lineHeight: '20px',
           textAlign: 'justify',
         }}
       >
-        External contacts, such as vendors and agents don’t have access to this
+        <ExclamationCircleOutlined /> External contacts, such as vendors and agents don’t have access to this
         chat.
       </div>
     </div>
@@ -273,40 +291,50 @@ export default function Index({
 
   const rightIconsBtn = [
     {
-      title: 'ACTIVITY',
+      name: 'TASKS',
+      className: 'iconfont icon_techIcon12',
+      icon: icon_rightMenu5,
+      size: '40px',
+      info: 'related styles',
+      order: '1'
+    },
+    {
+      name: 'CALENDAR',
+      className: 'iconfont icon_techIcon12',
+      size: "24px", order: '2'
+    },
+    {
+      name: 'ACTIVITY',
       className: 'iconfont icon_techIcon12',
       icon: icon_rightMenu1,
       size: '34px',
       info: 'new activity',
+      order: '3'
     },
     {
-      title: 'MESSAGES',
-      className: 'iconfont icon_techIcon13',
-      icon: icon_rightMenu2,
-      size: '29px',
-      info: 'new message',
-    },
-    {
-      title: 'TEAM & VENDOR',
-      className: 'iconfont icon_techIcon14',
-      icon: icon_rightMenu3,
-      size: '31px',
-      info: 'people',
-    },
-    {
-      title: 'INTERNAL CHAT',
+      name: 'INTERNAL CHAT',
       className: 'iconfont icon_techIcon15',
       icon: icon_rightMenu4,
       size: '32px',
       info: 'new message',
+      order: '4'
     },
-    // {
-    //   title: 'DUPLICATES',
-    //   className: 'iconfont icon_rightBtn5',
-    //   icon: icon_rightMenu5,
-    //   size: '40px',
-    //   info: 'related styles',
-    // },
+    {
+      name: 'MESSAGES',
+      className: 'iconfont icon_techIcon13',
+      icon: icon_rightMenu2,
+      size: '29px',
+      info: 'new message',
+      order: '5'
+    },
+    {
+      name: 'PERMISSIONS',
+      className: 'iconfont icon_techIcon14',
+      icon: icon_rightMenu3,
+      size: '31px',
+      info: 'people',
+      order: '6'
+    },
   ];
 
   const icons = [newIcon65, newIcon66, newIcon67, newIcon68, newIcon69];
@@ -909,19 +937,20 @@ export default function Index({
 
   const [CopychartList, setCopyChartList] = useState([]);
   useEffect(async () => {
+    console.log(active)
     if (!isNew) {
       setShowActive(active);
-      if (active === 1) {
+      if (active === 'ACTIVITY') {
         getActivityList();
       }
-      if (active === 2) {
+      if (active === 'MESSAGES') {
         getCommentList();
       }
-      if (active === 3) {
+      if (active === 'PERMISSIONS') {
         getOption();
         getTeamList();
       }
-      if (active === 4) {
+      if (active === 'INTERNAL CHAT') {
         // getTeamList();
         // console.log(ws);
         // sessionStorage.removeItem('ChatList')
@@ -995,9 +1024,9 @@ export default function Index({
                 let tag = `<span style="
                         font-weight:700
                      ">${res.msg.substring(
-                       res.msg.indexOf(red),
-                       res.msg.indexOf(red) + red.length
-                     )}</span>`;
+                  res.msg.indexOf(red),
+                  res.msg.indexOf(red) + red.length
+                )}</span>`;
                 let a = res.msg.substring(
                   res.msg.indexOf(red),
                   res.msg.indexOf(red) + red.length
@@ -1039,9 +1068,9 @@ export default function Index({
           let tag = `<span style="
           font-weight:700
        ">${add1[0].message.substring(
-         add1[0].message.indexOf(red),
-         add1[0].message.indexOf(red) + red.length
-       )}</span>`;
+            add1[0].message.indexOf(red),
+            add1[0].message.indexOf(red) + red.length
+          )}</span>`;
           let a = add1[0].message.substring(
             add1[0].message.indexOf(red),
             add1[0].message.indexOf(red) + red.length
@@ -1124,7 +1153,7 @@ export default function Index({
     };
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const [chatReadLength, setChatReadLength] = useState(0);
   const [chatTjLength, setChatTjLength] = useState(0); //未读的提及数量
@@ -1145,72 +1174,95 @@ export default function Index({
   }, [info]);
 
   const [isActive, setIsActive] = useState();
+  const internalContentRef = useRef(null)
+
+  // 滚动到底部
+  const scrollToBottom = () => {
+    if (internalContentRef) {
+      const current = internalContentRef.current
+      current.scrollTop = current.scrollHeight
+    }
+  }
+  {
+    (() => {
+      if (active === 'INTERNAL CHAT') {
+        setTimeout(() => {
+          scrollToBottom()
+        }, 300);
+      }
+    })()
+  }
+
 
   return (
     <div className={styles.rightBoxCtn}>
       <div className={styles.titleBox}>
         {rightIconsBtn.map((item, index) => (
           <>
-            {active === index + 1 && (
+            {active === item.name && (
               <>
-                <div className={styles.title}>
-                  <div>
-                    {/* {item.icon} */}
-                    <i
-                      className={`${item.className}`}
-                      style={{
-                        fontSize: `${item.size}`,
-                        color: '#000000',
-                        lineHeight: '40px',
-                      }}
-                    ></i>
-                    <h3>{item.title}</h3>
-                  </div>
+                <div className={styles.nextImage}>
                   <div
                     className={styles.backBtn}
                     onClick={() => {
                       setShow(0);
                     }}
                   >
-                    <span>Hide</span>
-                    <NextImage width={17} height={16} src={backIcon} />
+                    {/* <span>Hide</span> */}
+                    <NextImage width={12} height={10} src={backIcon} />
+                  </div>
+                </div>
+                <div className={styles.title}>
+                  <div>
+                    {/* {item.icon} */}
+                    {/* <i
+                      className={`${item.className}`}
+                      style={{
+                        fontSize: `${item.size}`,
+                        color: '#000000',
+                        lineHeight: '40px',
+                      }}
+                    ></i> */}
+                    <NextImage width={40} height={40} src={title1} />
+                    <h3 className={styles.titleColumn}><span>{item.name}</span><span>{item.name}</span></h3>
                   </div>
                 </div>
                 <div className={styles.info}>
-                  {(active != 4 || chatTjLength != 0) && (
+                  {(active != 'INTERNAL CHAT' || chatTjLength != 0) && (
                     <span
                       className={
-                        index === 2 || index === 4
+                        index === 5 || index === 4
                           ? styles.textIcon
                           : styles.textIconBg
                       }
                       style={{
                         display:
-                          active === 1 && activityReadNum === 0 && 'none',
+                          active === 'ACTIVITY' && activityReadNum === 0 && 'none',
                       }}
                     >
-                      {active === 1 && activityReadNum}
-                      {active === 2 && comments.total}
-                      {active === 3 && team.length + vendor.length}
-                      {active === 4 && chatTjLength}
+                      {active === 'ACTIVITY' && activityReadNum}
+                      {active === 'MESSAGES' && comments.total}
+                      {active === 'PERMISSIONS' && team.length + vendor.length}
+                      {active === 'INTERNAL CHAT' && chatTjLength >= 99 ? 99 : chatTjLength}
+                      {active === 'TASKS' && ''}
                     </span>
                   )}
 
                   <p
                     style={{
                       color:
-                        active === 1 &&
+                        active === 'ACTIVITY' &&
                         activityReadNum === 0 &&
                         'rgba(0,0,0,.5',
                       fontStyle:
-                        active === 1 && activityReadNum === 0 && 'italic',
+                        active === 'ACTIVITY' && activityReadNum === 0 && 'italic',
                     }}
                   >
-                    {active === 1 && activityReadNum !== 0 && item.info}
-                    {active === 1 && activityReadNum == 0 && 'no new activity'}
-                    {active === 2 && item.info}
-                    {active === 3 && item.info}
-                    {active === 4 && (
+                    {active === 'ACTIVITY' && activityReadNum !== 0 && item.info}
+                    {active === 'ACTIVITY' && activityReadNum == 0 && 'no new activity'}
+                    {active === 'MESSAGES' && item.info}
+                    {active === 'PERMISSIONS' && item.info}
+                    {active === 'INTERNAL CHAT' && (
                       <div
                         style={{
                           display: 'flex',
@@ -1219,13 +1271,13 @@ export default function Index({
                       >
                         <div
                           style={{
-                            color:
-                              chatTjLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
+                            fontWeight:chatReadLength == 0 ? '' : '600',
+                            color:chatTjLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
                           }}
                         >
-                          {active === 4 && chatTjLength != 0
-                            ? 'new mention'
-                            : 'no new mention'}
+                          {active === 'INTERNAL CHAT' && chatTjLength != 0
+                            ? 'New mentions'
+                            : 'No new mention'}
                         </div>
                         <div
                           style={{
@@ -1247,19 +1299,60 @@ export default function Index({
                                   color: '#000',
                                 }}
                               >
-                                {chatReadLength}
+                                {chatReadLength >= 99 ? 99 : chatReadLength}
                               </span>
                             )}
                           </div>
                           <div
                             style={{
-                              color:
-                                chatReadLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
+                              fontWeight:chatReadLength == 0 ? '' : '600',
+                              color:chatReadLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
                             }}
                           >
                             {chatReadLength == 0
-                              ? 'no new message'
-                              : 'new message'}
+                              ? 'No new message'
+                              : 'New messages'}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {active === 'TASKS' && (
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                      >
+                        <div className={styles.titleTab} >
+                          My tasks
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            marginLeft: '30px',
+                          }}
+                        >
+                          <div>
+                            {chatReadLength != 0 && (
+                              <span
+                                className={styles.textIconBg}
+                                style={{
+                                  // display: active === 1 && activityReadNum === 0 && 'none',
+                                  minWidth: '15px',
+                                  display: 'inline-block',
+                                  marginRight: '10px',
+                                  background: '#CCFF00',
+                                  color: '#000',
+                                }}
+                              >
+                                {/* {chatReadLength >= 99 ? 99 : chatReadLength} */}
+                                0
+                              </span>
+                            )}
+                          </div>
+                          <div className={styles.titleTab} >
+                            All tasks
                           </div>
                         </div>
                       </div>
@@ -1272,7 +1365,7 @@ export default function Index({
         ))}
       </div>
       <div className={styles.ctnBox}>
-        {showActive === 1 && (
+        {showActive === 'ACTIVITY' && (
           <>
             <div className={styles.activityOption} id="activityOptionSelect">
               <div className={styles.explain}>
@@ -1320,9 +1413,8 @@ export default function Index({
                             activityLogRead(item?.id);
                           }}
                           key={item?.activityLogId}
-                          className={`${styles.item} ${
-                            item?.meberType === 'vendor' && styles.itemOther
-                          } ${item?.now && styles.itemNow}`}
+                          className={`${styles.item} ${item?.meberType === 'vendor' && styles.itemOther
+                            } ${item?.now && styles.itemNow}`}
                           style={{ cursor: 'pointer' }}
                         >
                           <div className={styles.title}>
@@ -1393,7 +1485,7 @@ export default function Index({
             )}
           </>
         )}
-        {showActive === 2 && (
+        {showActive === 'MESSAGES' && (
           <div className={styles.commentsCtn}>
             <div className={styles.commentsBox}>
               {comments?.items?.length > 0 &&
@@ -1521,7 +1613,7 @@ export default function Index({
             </div>
           </div>
         )}
-        {showActive === 3 && (
+        {showActive === 'PERMISSIONS' && (
           <div className={styles.teamVendorCtn}>
             <div className={styles.search}>
               <div className={styles.input} id="teamVendorSearch">
@@ -1596,7 +1688,6 @@ export default function Index({
                               height: 58,
                             }}
                           >
-                            {console.log('user', user)}
                             <div className={styles.userSel}>
                               {user.posts?.[0]?.code === 'Vendor' ? (
                                 <>
@@ -1747,15 +1838,15 @@ export default function Index({
                     dropdownStyle={{
                       display: user?.styleStatus === '1' && 'none',
                     }}
-                    // suffixIcon={
-                    //   <i
-                    //     className={
-                    //       user?.styleStatus !== "1" &&
-                    //       "iconfont icon_stylesBottomJt"
-                    //     }
-                    //     style={{ fontSize: "20px", color: "#383A42" }}
-                    //   ></i>
-                    // }
+                  // suffixIcon={
+                  //   <i
+                  //     className={
+                  //       user?.styleStatus !== "1" &&
+                  //       "iconfont icon_stylesBottomJt"
+                  //     }
+                  //     style={{ fontSize: "20px", color: "#383A42" }}
+                  //   ></i>
+                  // }
                   >
                     {user?.styleStatus === '1' && (
                       <Option value="1">Owner</Option>
@@ -1827,9 +1918,8 @@ export default function Index({
 
               <div className={styles.otherBox}>
                 <div
-                  className={`${styles.title} ${
-                    boxShow.style && styles.titleAct
-                  }`}
+                  className={`${styles.title} ${boxShow.style && styles.titleAct
+                    }`}
                   onClick={() => {
                     setBoxShow({ ...boxShow, style: !boxShow.style });
                   }}
@@ -1838,9 +1928,8 @@ export default function Index({
                   <p>STYLE OWNER</p>
                 </div>
                 <div
-                  className={`${styles.completeCtn} ${
-                    boxShow.style && styles.completeCtnAct
-                  }`}
+                  className={`${styles.completeCtn} ${boxShow.style && styles.completeCtnAct
+                    }`}
                 >
                   <h3>Person who created this style. </h3>
                   <div className={styles.complete}>
@@ -1860,9 +1949,8 @@ export default function Index({
 
               <div className={styles.otherBox}>
                 <div
-                  className={`${styles.title} ${
-                    boxShow.editor && styles.titleAct
-                  }`}
+                  className={`${styles.title} ${boxShow.editor && styles.titleAct
+                    }`}
                   onClick={() => {
                     setBoxShow({ ...boxShow, editor: !boxShow.editor });
                   }}
@@ -1871,9 +1959,8 @@ export default function Index({
                   <p>EDITOR</p>
                 </div>
                 <div
-                  className={`${styles.completeCtn} ${
-                    boxShow.editor && styles.completeCtnAct
-                  }`}
+                  className={`${styles.completeCtn} ${boxShow.editor && styles.completeCtnAct
+                    }`}
                 >
                   <div className={styles.complete}>
                     <NextImage src={statusIcon1} width={12} height={12} />
@@ -1900,9 +1987,8 @@ export default function Index({
 
               <div className={styles.otherBox}>
                 <div
-                  className={`${styles.title} ${
-                    boxShow.viewer && styles.titleAct
-                  }`}
+                  className={`${styles.title} ${boxShow.viewer && styles.titleAct
+                    }`}
                   onClick={() => {
                     setBoxShow({ ...boxShow, viewer: !boxShow.viewer });
                   }}
@@ -1911,9 +1997,8 @@ export default function Index({
                   <p>VIEWER</p>
                 </div>
                 <div
-                  className={`${styles.completeCtn} ${
-                    boxShow.viewer && styles.completeCtnAct
-                  }`}
+                  className={`${styles.completeCtn} ${boxShow.viewer && styles.completeCtnAct
+                    }`}
                 >
                   <div className={styles.complete}>
                     <NextImage src={statusIcon1} width={12} height={12} />
@@ -1940,110 +2025,146 @@ export default function Index({
             </div>
           </div>
         )}
-        {showActive === 4 && (
-          <div className={styles.internalChatCtn}>
+        {showActive === 'INTERNAL CHAT' && (
+          <div className={styles.internalChatCtn} >
             <div
+              ref={internalContentRef}
               style={{
-                maxHeight: '55vh',
+                maxHeight: '72vh',
                 overflowY: 'auto',
+                scrollBehavior: 'smooth',
               }}
             >
-              {CopychartList?.map((red, index) => {
+              {/* 聊天内容区域 */}
+              {CopychartList.reverse()?.map((red, index) => {
                 return (
                   <div
                     style={{
-                      background:
-                        red?.fromUserName == localStorage.getItem('userName') ||
-                        red?.messageUserName == localStorage.getItem('userName')
-                          ? ''
-                          : red?.isRead === '1'
-                          ? 'rgba(56, 58, 66, 0.05)'
-                          : '#fff',
-                      border:
-                        red?.fromUserName == localStorage.getItem('userName') ||
-                        red?.messageUserName == localStorage.getItem('userName')
-                          ? ''
-                          : red?.isRead === '1'
-                          ? '2px solid transparent'
-                          : '2px solid #000',
+                      // background:
+                      //   red?.fromUserName == localStorage.getItem('userName') ||
+                      //   red?.messageUserName == localStorage.getItem('userName')
+                      //     ? ''
+                      //     : red?.isRead === '1'
+                      //     ? 'rgba(56, 58, 66, 0.05)'
+                      //     : '#fff',
                       position: 'relative',
                     }}
-                    onClick={() => {
-                      if (
-                        red.isRead === '1' ||
-                        red.fromUserName == localStorage.getItem('userName') ||
-                        red?.messageUserName == localStorage.getItem('userName')
-                      ) {
-                        return false;
-                      }
-                      let options = {};
-                      if (red?.chatMessageId) {
-                        options = {
-                          ...red,
-                        };
-                      } else {
-                        options = {
-                          index: index,
-                          teamId: red.teamId,
-                          userId: red.messageFromUser,
-                        };
-                      }
-                      chatMsgRead(options).then((res) => {
-                        console.log(res);
-                        if (res?.data?.code == 200) {
-                          getChatTextList(info?.teamId);
-                          let add = JSON.parse(JSON.stringify(CopychartList));
-                          console.log(add);
-                          add.forEach((res, index1) => {
-                            // console.log(res,red)
-                            if (
-                              (red.chatMessageId &&
-                                red.chatMessageId == res.chatMessageId) ||
-                              index1 == index
-                            ) {
-                              res['isRead'] = '1';
-                              res['lastReaderName'] =
-                                localStorage?.getItem('userName');
-                            }
-                          });
-                          if (
-                            red?.message?.includes(
-                              `@${localStorage.getItem('userName')}`
-                            ) ||
-                            red?.msg?.includes(
-                              `@${localStorage.getItem('userName')}`
-                            )
-                          ) {
-                            setChatTjLength(chatTjLength - 1);
-                          }
-                          console.log(add);
-                          setCopyChartList(add);
-                        }
-                      });
-                      console.log(red);
-                    }}
+                    // onClick={() => {
+                    //   if (
+                    //     red.isRead === '1' ||
+                    //     red.fromUserName == localStorage.getItem('userName') ||
+                    //     red?.messageUserName == localStorage.getItem('userName')
+                    //   ) {
+                    //     return false;
+                    //   }
+                    //   let options = {};
+                    //   if (red?.chatMessageId) {
+                    //     options = {
+                    //       ...red,
+                    //     };
+                    //   } else {
+                    //     options = {
+                    //       index: index,
+                    //       teamId: red.teamId,
+                    //       userId: red.messageFromUser,
+                    //     };
+                    //   }
+                    //   chatMsgRead(options).then((res) => {
+                    //     console.log(res);
+                    //     if (res?.data?.code == 200) {
+                    //       getChatTextList(info?.teamId);
+                    //       let add = JSON.parse(JSON.stringify(CopychartList));
+                    //       console.log(add);
+                    //       add.forEach((res, index1) => {
+                    //         // console.log(res,red)
+                    //         if (
+                    //           (red.chatMessageId &&
+                    //             red.chatMessageId == res.chatMessageId) ||
+                    //           index1 == index
+                    //         ) {
+                    //           res['isRead'] = '1';
+                    //           res['lastReaderName'] =
+                    //             localStorage?.getItem('userName');
+                    //         }
+                    //       });
+                    //       if (
+                    //         red?.message?.includes(
+                    //           `@${localStorage.getItem('userName')}`
+                    //         ) ||
+                    //         red?.msg?.includes(
+                    //           `@${localStorage.getItem('userName')}`
+                    //         )
+                    //       ) {
+                    //         setChatTjLength(chatTjLength - 1);
+                    //       }
+                    //       console.log(add);
+                    //       setCopyChartList(add);
+                    //     }
+                    //   });
+                    //   console.log(red);
+                    // }}
                     className={styles.box}
                   >
-                    {red?.isRead !== '1' &&
-                      (red?.message?.includes(
-                        `@${localStorage.getItem('userName')}`
-                      ) ||
-                        red?.msg?.includes(
+                    <div style={{
+                      marginLeft: red?.fromUserName == localStorage.getItem('userName') ||
+                        red?.messageUserName == localStorage.getItem('userName') ? 'auto' : '',
+                      width: red?.fromUserName == localStorage.getItem('userName') ||
+                        red?.messageUserName == localStorage.getItem('userName') ? '270px' : '310px',
+                      display: 'flex', justifyContent: "space-between", marginTop: '16px'
+                    }}>
+
+                      <div className={styles.user}>
+                        {red?.fromUserName == localStorage.getItem('userName') ||
+                          red?.messageUserName == localStorage.getItem('userName') ? '' :
+                          <span
+                            style={{
+                              width: '40px',
+                              height: '40px',
+                              marginLeft: '10px',
+                              marginBottom: '-17px',
+                              background:
+                                red?.fromUserName ==
+                                  localStorage.getItem('userName')
+                                  ? 'rgba(0,0,0,0.5)'
+                                  : red?.isRead === '1'
+                                    ? 'rgba(0,0,0,0.5)'
+                                    : `#00C673`,
+                            }}
+                          >
+                            {abbreviation(
+                              red?.fromUserName ||
+                              red?.messageUserName ||
+                              localStorage.getItem('userName')
+                            )}
+                          </span>
+                        }
+                        <p>
+                          {
+                            red?.fromUserName == localStorage.getItem('userName') ||
+                              red?.messageUserName == localStorage.getItem('userName') ? 'You' : red?.fromUserName || red?.messageUserName
+                          }
+                        </p>
+                      </div>
+                      {red?.isRead !== '1' &&
+                        (red?.message?.includes(
                           `@${localStorage.getItem('userName')}`
-                        )) && (
-                        <div
-                          style={{
-                            position: 'absolute',
-                            top: '10px',
-                            right: '25px',
-                            width: '10px',
-                            height: '10px',
-                            background: '#f00',
-                            borderRadius: '50%',
-                          }}
-                        ></div>
-                      )}
-                    {red?.isRead !== '1' && (
+                        ) ||
+                          red?.msg?.includes(
+                            `@${localStorage.getItem('userName')}`
+                          )) && (
+                          <div
+                            style={{
+                              position: 'absolute',
+                              top: '10px',
+                              right: '25px',
+                              width: '10px',
+                              height: '10px',
+                              background: '#f00',
+                              borderRadius: '50%',
+                            }}
+                          ></div>
+                        )}
+                      {/* {red?.isRead !== '1' && (
                       <div
                         style={{
                           position: 'absolute',
@@ -2055,14 +2176,14 @@ export default function Index({
                           borderRadius: '50%',
                         }}
                       ></div>
-                    )}
-                    <div className={styles.time}>
-                      <p
-                        style={{
-                          fontSize: '10px',
-                        }}
-                      >
-                        {/* {getdate(
+                    )} */}
+                      <div className={styles.time}>
+                        <p
+                          style={{
+                            fontSize: '10px',
+                          }}
+                        >
+                          {/* {getdate(
                           red?.timestamp || red?.updateTime || red?.createTime
                         ) == getdate(new Date().getTime())
                           ? 'Today' +
@@ -2084,45 +2205,23 @@ export default function Index({
                                  red?.createTime
                              )}
                           `} */}
-                        {(red?.timestamp ||
-                          red?.updateTime ||
-                          red?.createTime) && (
-                          <TimeMethod
-                            timeType="pastTimes2"
-                            time={
-                              red?.timestamp ||
-                              red?.updateTime ||
-                              red?.createTime
-                            }
-                          />
-                        )}
-                      </p>
+                          {(red?.timestamp ||
+                            red?.updateTime ||
+                            red?.createTime) && (
+                              <TimeMethod
+                                timeType="pastTimes2"
+                                time={
+                                  red?.timestamp ||
+                                  red?.updateTime ||
+                                  red?.createTime
+                                }
+                              />
+                            )}
+                        </p>
+                      </div>
                     </div>
-                    <div className={styles.user}>
-                      <span
-                        style={{
-                          background:
-                            red?.fromUserName ==
-                            localStorage.getItem('userName')
-                              ? 'rgba(0,0,0,0.5)'
-                              : red?.isRead === '1'
-                              ? 'rgba(0,0,0,0.5)'
-                              : `#00C673`,
-                        }}
-                      >
-                        {abbreviation(
-                          red?.fromUserName ||
-                            red?.messageUserName ||
-                            localStorage.getItem('userName')
-                        )}
-                      </span>
-                      <p>
-                        {red?.fromUserName ||
-                          red?.messageUserName ||
-                          localStorage.getItem('userName')}
-                      </p>
-                    </div>
-                    <div className={styles.content}>
+                    <div className={red?.fromUserName == localStorage.getItem('userName') ||
+                      red?.messageUserName == localStorage.getItem('userName') ? styles.contentOneSelf : styles.contentOther}>
                       <p
                         dangerouslySetInnerHTML={{
                           __html: red?.message || red?.msg,
@@ -2130,12 +2229,14 @@ export default function Index({
                         style={{
                           wordWrap: 'break-word',
                           wordBreak: 'break-all',
+                          fontSize: '16px',
                           color: 'rgba(0, 0, 0, 0.7)',
                         }}
                       >
                         {/* {red?.message || red?.msg} */}
                       </p>
                     </div>
+                    {/* 底部all read */}
                     <div className={styles.bottomText}>
                       {red.isAllRead === 1 && (
                         <div>
@@ -2162,7 +2263,7 @@ export default function Index({
                           {(red?.fromUserName ==
                             localStorage.getItem('userName') &&
                             red?.readNum === 1) ||
-                          red?.messageUserName ==
+                            red?.messageUserName ==
                             localStorage.getItem('userName') ? (
                             <div>
                               <IconButton
@@ -2190,12 +2291,11 @@ export default function Index({
                               <IconButton
                                 name={
                                   red?.lastReaderName ==
-                                  localStorage.getItem('userName')
+                                    localStorage.getItem('userName')
                                     ? `Read by you`
-                                    : `Read by ${
-                                        red?.lastReaderName ||
-                                        red?.messageUserName
-                                      }`
+                                    : `Read by ${red?.lastReaderName ||
+                                    red?.messageUserName
+                                    }`
                                 }
                                 buttonStyle={{
                                   padding: '0 10px',
@@ -2244,8 +2344,14 @@ export default function Index({
               themeMode={themeMode}
               info={info}
               teamList={team}
+              scrollToBottom={scrollToBottom}
             />
           </div>
+        )}
+        {showActive === 'TASKS' && (
+        <div>
+          111
+        </div>
         )}
         {/* {showActive === 5 && (
           <div className={styles.duplicatesCtn}>

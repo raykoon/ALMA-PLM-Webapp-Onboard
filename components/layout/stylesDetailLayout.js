@@ -41,11 +41,42 @@ const icons = [
   icon_rightBtn5,
 ];
 const iconsBtn = [
-  { className: 'iconfont icon_techIcon12', size: '24px' },
-  { className: 'iconfont icon_techIcon13', size: '24px' },
-  { className: 'iconfont icon_techIcon14', size: '24px' },
-  { className: 'iconfont icon_techIcon15', size: '24px' },
-  // { className: 'iconfont icon_rightBtn5', size: '24px' },
+  {
+    name:'TASKS', 
+    className:'iconfont icon_techIcon12', 
+    size:"24px", 
+    order:'1'
+  },
+  {
+    name:'CALENDAR', 
+    className:'iconfont icon-a-Icon3', 
+    size:"24px", 
+    order:'2'
+  },
+  {
+    name:'ACTIVITY', 
+    className:'iconfont icon_techIcon12', 
+    size:"24px", 
+    order:'3'
+  },
+  {
+    name:'INTERNAL CHAT', 
+    className:'iconfont icon_techIcon15', 
+    size:"24px", 
+    order:'4'
+  },
+  {
+    name:'MESSAGES', 
+    className:'iconfont icon_techIcon13', 
+    size:"24px", 
+    order:'5'
+  },
+  {
+    name:'PERMISSIONS', 
+    className:'iconfont icon_techIcon14', 
+    size:"24px", 
+    order:'6'
+  },
 ];
 
 export default function Index({
@@ -308,7 +339,6 @@ const [islittle,setIslittle]=useState(true)
 
       </div>
       <div onClick={()=>{
-        console.log(123)
         setCloseLayout(false)
         setIslittle(true)
       }} style={{ flex: '1', maxHeight: '100vh', overflow: 'auto' }}>
@@ -321,19 +351,19 @@ const [islittle,setIslittle]=useState(true)
 
       }}
         className={styles.rightBox}
-        style={{ width: show ? '400px' : '86px' }}
+        style={{ width: show ? '400px' : '48px' }}
       >
         {show === 0 ? (
           <>
             {iconsBtn.map((icon, index) => {
-              if (index != 3 || !roles) {
+              if (icon.name != 'INTERNAL CHAT' || !roles) {
                 return (
                   <div
                     className={`${styles.itemIcon} ${
-                      index === 2 && styles.teamBtn
+                      icon.name === 'PERMISSIONS' && styles.teamBtn
                     }`}
                     onClick={() => {
-                      setShow(index + 1);
+                      setShow(icon.name);
                     }}
                   >
                     <i
@@ -342,6 +372,7 @@ const [islittle,setIslittle]=useState(true)
                         fontSize: `${icon.size}`,
                         color: 'rgba(0,0,0,.5)',
                         lineHeight: '24px',
+                        position:'relative'
                       }}
                     ></i>
                     {/* {index === 0 && activityReadNum !== 0 && (
@@ -353,7 +384,7 @@ const [islittle,setIslittle]=useState(true)
                         {activityReadNum || 0}
                       </span>
                     )} */}
-                     {index === 0  && (
+                     {/* {index === 0  && (
                       <span
                          style={{
                             width:'24px',
@@ -371,7 +402,7 @@ const [islittle,setIslittle]=useState(true)
                       >
                         {activityReadNum || 0}
                       </span>
-                    )}
+                    )} */}
                     {/* {index === 2 && teamNum !== 0 && (
                       <span
                         className={
@@ -381,7 +412,7 @@ const [islittle,setIslittle]=useState(true)
                         {teamNum + 1}
                       </span>
                     )} */}
-                    {index === 2 && (
+                    {/* {index === 2 && (
                       <span
                          style={{
                             width:'24px',
@@ -398,7 +429,7 @@ const [islittle,setIslittle]=useState(true)
                       >
                         {teamNum+1 || 0}
                       </span>
-                    )}
+                    )} */}
                     {/* {index === 2 && teamNum === 0 && (
                       <span
                         style={{
@@ -411,7 +442,7 @@ const [islittle,setIslittle]=useState(true)
                         }}
                       ></span>
                     )} */}
-                    {index === 2 && teamTips && (
+                    {icon.name === 'PERMISSIONS'  && teamTips && (
                       <div
                         className={styles.teamTips}
                         style={{
@@ -475,42 +506,48 @@ const [islittle,setIslittle]=useState(true)
                         {chatReadLength}
                       </span>
                     )} */}
-                    {index === 1  && (
+                    {icon.name === 'MESSAGES'  && (
                       <span
                          style={{
-                            width:'24px',
-                            height:'24px',
-                            color:'#000',
-                            background:'#E5E5E5',
+                            width:'8px',
+                            height:'8px',
+                            // color:'#000',
+                            background:'red',
                             lineHeight:'24px',
                             textAlign:'center',
                             fontSize:'12px',
                             fontWeight:'500',
                             borderRadius:'2px',
                             marginLeft:'10px',
+                            borderRadius:'10px',
+                            position:'absolute',
+                            margin:'0px 0px 15px 20px'
+                            // top:'0px',
+                            // right:'0px',
                             // opacity:activityReadNum===0
                          }}
                       >
-                        0
+                        {/* 0 */}
                       </span>
                     )}
-                    {index === 3  && (
+                    {icon.name === 'INTERNAL CHAT'  && (
                       <span
                          style={{
-                            width:'24px',
-                            height:'24px',
-                            color:chatReadLength? '#CD0303' :'#000',
-                            background:chatReadLength ? '#FEE4E2':'#E5E5E5',
+                            width:'8px',
+                            height:'8px',
+                            background:'red',
                             lineHeight:'24px',
                             textAlign:'center',
                             fontSize:'12px',
                             fontWeight:'500',
                             borderRadius:'2px',
                             marginLeft:'10px',
-                            // opacity:activityReadNum===0
+                            borderRadius:'10px',
+                            position:'absolute',
+                            margin:'0px 0px 15px 20px'
                          }}
                       >
-                        {chatReadLength || 0}
+                        {/* {chatReadLength || 0} */}
                       </span>
                     )}
                   </div>
