@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { Select, message, Spin, Skeleton, Input, Form, Mentions } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { Select, message, Spin, Skeleton, Input, Form, Mentions, Checkbox, Collapse, Button, Radio } from 'antd';
+const { Panel } = Collapse;
+import { ExclamationCircleOutlined, DeleteOutlined, PlusOutlined, SearchOutlined } from '@ant-design/icons';
 import styles from './stylesDetail.module.scss';
 import NextImage from 'next/image';
 import newIcon65 from '../../public/images/newIcon65.png';
@@ -39,6 +40,14 @@ import {
   chatDataList,
   chatMsgRead,
   chatReadNum,
+  taskList,
+  editTask,
+  delTask,
+  addTask,
+  getClosingTime,
+  closingTime,
+  taskNum,
+  userLists
 } from '../../services/marker/comMents';
 const { Option } = Select;
 const { TextArea } = Input;
@@ -936,6 +945,19 @@ export default function Index({
   const [chartList, setChartList] = useState([]);
 
   const [CopychartList, setCopyChartList] = useState([]);
+  const [CopychartListFilter, setCopyChartListFilter] = useState([]);
+
+
+  const [taskListAll, setTaskList] = useState([]);
+  const [taskCompletedList, setCompletedList] = useState([]);
+
+  const [chatIdUpdata, setChatIdUpdata] = useState([]);
+  const [lastCloseTime, setLastCloseTime] = useState([]);
+
+  const [allTaskNumber, setAllTaskNumber] = useState(0)
+  const [myTaskNumber, setMyTaskNumber] = useState(0)
+
+
   useEffect(async () => {
     console.log(active)
     if (!isNew) {
@@ -955,9 +977,84 @@ export default function Index({
         // console.log(ws);
         // sessionStorage.removeItem('ChatList')
         fourFnc();
+        getClosingTimeData()
+      }
+      if (active === 'TASKS') {
+        getTaskList();
+        getCompletedList();
+        getTaskNum()
+        getUserLists()
       }
     }
   }, [active]);
+
+  // 获取上一次关闭时间节点
+  const getClosingTimeData = () => {
+    console.log(info)
+    getClosingTime({
+      teamId: info?.teamId,
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        console.log(res.data.data)
+        setChatIdUpdata(res.data.data.chatId)
+        setLastCloseTime(res.data.data.closingTime)
+      }
+    });
+  }
+  // 获取未完成task列表
+  const getTaskList = async () => {
+    let res;
+    res = await reqTeamList({
+      styleId: info.styleId,
+      teamId: info.teamId,
+    });
+    if (res.code !== API_STATUS.SUCCESS) return message.info(` ${res.msg} `);
+    taskList({
+      styleId: info?.styleId,
+      completed: 0
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        setTaskList(res?.data?.data);
+      }
+    });
+  }
+
+  // 获取已完成task列表
+  const getCompletedList = async () => {
+    let res;
+    res = await reqTeamList({
+      styleId: info.styleId,
+      teamId: info.teamId,
+    });
+    if (res.code !== API_STATUS.SUCCESS) return message.info(` ${res.msg} `);
+    taskList({
+      styleId: info?.styleId,
+      completed: 1
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        setCompletedList(res?.data?.data);
+      }
+    });
+  }
+
+  //获取task列表统计数
+  const getTaskNum = async () => {
+    let res;
+    res = await reqTeamList({
+      styleId: info.styleId,
+      teamId: info.teamId,
+    });
+    if (res.code !== API_STATUS.SUCCESS) return message.info(` ${res.msg} `);
+    taskNum({
+      styleId: info?.styleId,
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        setAllTaskNumber(res.data.data.allNum)
+        setMyTaskNumber(res.data.data.myNum)
+      }
+    });
+  }
+
   const fourFnc = async () => {
     let res;
     res = await reqTeamList({
@@ -967,7 +1064,6 @@ export default function Index({
 
     if (res.code !== API_STATUS.SUCCESS) return message.info(` ${res.msg}   `);
     const styleTeamlist = res.data;
-    console.log(styleTeamlist);
     let textShow = [];
     let textTj = [];
     setAllTeamList(styleTeamlist);
@@ -1039,6 +1135,7 @@ export default function Index({
             });
           });
           setCopyChartList(add);
+          setCopyChartListFilter(add);
         }
       }
     });
@@ -1048,7 +1145,7 @@ export default function Index({
   useEffect(() => {
     if (hcxxList?.length > 0) {
       let add1 = JSON.parse(JSON.stringify(CopychartList));
-      add1.unshift(hcxxList[0]);
+      add1.push(hcxxList[0]);
       let add = Number(chatTjLength);
       let add3 = Number(chatReadLength);
       // add1?.forEach((red) => {
@@ -1081,10 +1178,17 @@ export default function Index({
           add1[0].message = csText;
         }
       });
-      console.log(add);
       setChatTjLength(add);
       setChatReadLength(add3);
+      let flag = 1
+      add1.forEach((item) => {
+        if (flag && item.timestamp > lastCloseTime) {
+          item.showNewStyle = true
+          flag = 0
+        }
+      })
       setCopyChartList(add1);
+      setCopyChartListFilter(add1);
       setHcxxList([]);
     }
   }, [hcxxList]);
@@ -1167,6 +1271,102 @@ export default function Index({
     });
   };
 
+  const newMentions = (num) => {
+    if (num) {
+      setCopyChartList(CopychartList.filter((item) => item.msg.includes(`@${localStorage.getItem('userName')}`)))
+    }
+  }
+
+  const newMessage = () => {
+    setCopyChartList(CopychartListFilter)
+  }
+  
+  // task复选框选择
+  const checked = (e, item) => {
+    if (e.target.checked) {
+      editTask({
+        completed: 1,
+        taskId: item.taskId,
+      }).then((res) => {
+        if (res?.data?.code == 200) {
+          getTaskList()
+          getCompletedList()
+        }
+      })
+    } else {
+      editTask({
+        completed: 0,
+        taskId: item.taskId,
+      }).then((res) => {
+        if (res?.data?.code == 200) {
+          getTaskList()
+          getCompletedList()
+        }
+      })
+    }
+  }
+  // task删除接口
+  const taskDel = (data) => {
+    delTask({
+      id: data.taskId,
+    }).then((res) => {
+      getCompletedList()
+      getTaskList()
+      // console.log(res)
+    });
+
+  }
+
+
+  //task新增接口
+  const taskAdd = (data) => {
+    addTask({
+      description: inputData,
+      styleId: info.styleId
+    }).then((res) => {
+      getTaskNum()
+      console.log(res)
+    });
+  }
+
+  const [allUserList, setuserList] = useState([])
+  const getUserLists = async () => {
+    let res;
+    res = await reqTeamList({
+      styleId: info.styleId,
+      teamId: info.teamId,
+    });
+    if (res.code !== API_STATUS.SUCCESS) return message.info(` ${res.msg} `);
+    userLists({
+      styleId: info.styleId,
+      teamId: info.teamId,
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        setuserList(res.data.data)
+      }
+    });
+  }
+
+  const [taskModal, setTaskModal] = useState('false')
+  const [inputData, setInputData] = useState()
+
+  const showAddTask = () => {
+    setTaskModal(!taskModal)
+  }
+  //新增task enter
+  const addEnter = (item) => {
+    taskAdd()
+    getTaskList()
+    setTaskModal('false')
+    setInputData('')
+
+  }
+  //失焦事件
+  const inputBlur = () => {
+    setTaskModal('false')
+    setInputData('')
+  }
+
   useEffect(() => {
     if (info) {
       getChatTextList(info?.teamId);
@@ -1193,6 +1393,39 @@ export default function Index({
     })()
   }
 
+  //关闭页面更新时间节点
+  const upDataclosingTime = () => {
+    closingTime({
+      chatId: chatIdUpdata,
+      closingTime: new Date().getTime()
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        console.log(res.data)
+      }
+    });
+  }
+
+  const [isShowEditTask, setIsShowEditTask] = useState(false)
+  const [isShowEditTaskInd, setIsShowEditTaskInd] = useState()
+
+  const editTaskApply = (index) => {
+    setIsShowEditTaskInd(index)
+    setIsShowEditTask(!isShowEditTask)
+  }
+
+  const editTaskSub = (userInfo,item) => {
+    editTask({
+      assignUserId: userInfo.userId,
+      taskId: item.taskId,
+    }).then((res) => {
+      if (res?.data?.code == 200) {
+        console.log(res.data)
+        editTaskApply()
+        getTaskList()
+      }
+    });
+  }
+
 
   return (
     <div className={styles.rightBoxCtn}>
@@ -1205,6 +1438,7 @@ export default function Index({
                   <div
                     className={styles.backBtn}
                     onClick={() => {
+                      upDataclosingTime()
                       setShow(0);
                     }}
                   >
@@ -1244,7 +1478,7 @@ export default function Index({
                       {active === 'MESSAGES' && comments.total}
                       {active === 'PERMISSIONS' && team.length + vendor.length}
                       {active === 'INTERNAL CHAT' && chatTjLength >= 99 ? 99 : chatTjLength}
-                      {active === 'TASKS' && ''}
+                      {active === 'TASKS' && myTaskNumber > 0 ? myTaskNumber : ''}
                     </span>
                   )}
 
@@ -1271,9 +1505,11 @@ export default function Index({
                       >
                         <div
                           style={{
-                            fontWeight:chatReadLength == 0 ? '' : '600',
-                            color:chatTjLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
+                            cursor: 'pointer',
+                            fontWeight: chatReadLength == 0 ? '' : '600',
+                            color: chatTjLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
                           }}
+                          onClick={() => newMentions(chatTjLength)}
                         >
                           {active === 'INTERNAL CHAT' && chatTjLength != 0
                             ? 'New mentions'
@@ -1305,9 +1541,11 @@ export default function Index({
                           </div>
                           <div
                             style={{
-                              fontWeight:chatReadLength == 0 ? '' : '600',
-                              color:chatReadLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
+                              cursor: 'pointer',
+                              fontWeight: chatReadLength == 0 ? '' : '600',
+                              color: chatReadLength == 0 ? 'rgba(0, 0, 0, 0.5)' : '',
                             }}
+                            onClick={() => newMessage(chatTjLength)}
                           >
                             {chatReadLength == 0
                               ? 'No new message'
@@ -1334,7 +1572,7 @@ export default function Index({
                           }}
                         >
                           <div>
-                            {chatReadLength != 0 && (
+                            {(
                               <span
                                 className={styles.textIconBg}
                                 style={{
@@ -1346,8 +1584,7 @@ export default function Index({
                                   color: '#000',
                                 }}
                               >
-                                {/* {chatReadLength >= 99 ? 99 : chatReadLength} */}
-                                0
+                                {allTaskNumber >= 99 ? 99 : allTaskNumber}
                               </span>
                             )}
                           </div>
@@ -2036,7 +2273,7 @@ export default function Index({
               }}
             >
               {/* 聊天内容区域 */}
-              {CopychartList.reverse()?.map((red, index) => {
+              {CopychartList?.map((red, index) => {
                 return (
                   <div
                     style={{
@@ -2105,6 +2342,13 @@ export default function Index({
                     // }}
                     className={styles.box}
                   >
+                    {
+                      red.showNewStyle ?
+                        <div className={styles.showNew}>
+                          <i></i>
+                          <p>New</p>
+                        </div> : ''
+                    }
                     <div style={{
                       marginLeft: red?.fromUserName == localStorage.getItem('userName') ||
                         red?.messageUserName == localStorage.getItem('userName') ? 'auto' : '',
@@ -2118,6 +2362,7 @@ export default function Index({
                           red?.messageUserName == localStorage.getItem('userName') ? '' :
                           <span
                             style={{
+                              position: 'relative',
                               width: '40px',
                               height: '40px',
                               marginLeft: '10px',
@@ -2136,6 +2381,18 @@ export default function Index({
                               red?.messageUserName ||
                               localStorage.getItem('userName')
                             )}
+                            {/* 是否在线 */}
+                            <span style={{
+                              display: red.online ? 'block' : 'none',
+                              position: 'absolute',
+                              width: '12px',
+                              height: '12px',
+                              right: '0px',
+                              bottom: '0px',
+                              background: '#13DE89',
+                              border: '1.5px solid #FFFFFF',
+                              borderRadius: '6px',
+                            }}></span>
                           </span>
                         }
                         <p>
@@ -2145,7 +2402,7 @@ export default function Index({
                           }
                         </p>
                       </div>
-                      {red?.isRead !== '1' &&
+                      {/* {red?.isRead !== '1' &&
                         (red?.message?.includes(
                           `@${localStorage.getItem('userName')}`
                         ) ||
@@ -2163,7 +2420,7 @@ export default function Index({
                               borderRadius: '50%',
                             }}
                           ></div>
-                        )}
+                        )} */}
                       {/* {red?.isRead !== '1' && (
                       <div
                         style={{
@@ -2349,9 +2606,145 @@ export default function Index({
           </div>
         )}
         {showActive === 'TASKS' && (
-        <div>
-          111
-        </div>
+          <div>
+            <div className={styles.taskEdit}>
+              {
+                taskListAll.map((item, index) => {
+                  return (
+                    <div className={styles.cont}>
+                      <div>
+                        <div className={styles.des}><Checkbox  onChange={(e) => checked(e, item)}></Checkbox> <span className={styles.contTit}> {item.description} </span></div>
+                        {
+                          item.assignName ?
+                            <p><span style={{ fontSize: '20px', width: '24px', height: '24px' }} className='iconfont icon_subnav1'><span style={{ fontSize: '14px', fontWeight: '500', verticalAlign: 'text-bottom', marginLeft: '8px' }}>{item.assignName}</span></span> </p> :
+                            <p style={{ position: 'relative' }} >
+                              <span style={{ fontSize: '20px', width: '24px', height: '24px' }} className='iconfont icon_subnav1'>
+                                <span onClick={()=>editTaskApply(index)} style={{ fontSize: '14px', fontWeight: '500', verticalAlign: 'text-bottom', marginLeft: '8px', textDecorationLine: 'underline' }}>
+                                  Assign a user
+                                </span>
+                              </span>
+                              <span>
+
+                              </span>
+                              {
+                                isShowEditTask && index === isShowEditTaskInd? (
+                                  <div className={styles.taskEditModal}>
+                                    <div className={styles.editTit}>
+                                      <Input size="large" placeholder="Search or create an option" prefix={<SearchOutlined />} />
+                                    </div>
+                                    <div className={styles.taskEditCont}>
+                                      <Radio.Group  >
+                                        {
+                                          allUserList.map((userInfo) => {
+                                            return (
+                                              <div className={styles.editContList}>
+                                                <Radio value={userInfo.userName}>
+                                                  {userInfo?.fromUserName == localStorage.getItem('userName') ||
+                                                    userInfo?.messageUserName == localStorage.getItem('userName') ? '' :
+                                                    <span
+                                                      style={{
+                                                        display: 'inline-block',
+                                                        position: 'relative',
+                                                        width: '25px',
+                                                        height: '25px',
+                                                        marginBottom: '-17px',
+                                                        background: `#0559a8`,
+                                                        borderRadius: '50%',
+                                                        textAlign: 'center',
+                                                        lineHeight: '25px',
+                                                        color: 'white',
+                                                        marginLeft: '10px'
+                                                      }}
+                                                    >
+                                                      {abbreviation(userInfo.userName)}
+                                                    </span>
+                                                  }
+                                                  <span className={styles.editBtnUserName}>{userInfo.userName}</span>
+                                                </Radio>
+                                              </div>
+                                            )
+                                          })
+                                        }
+                                      </Radio.Group>
+                                    </div>
+                                    <div className={styles.taskEditModalBottom}>
+                                      <span className={styles.editBtText}>
+                                        32 Result
+                                      </span>
+                                      <div className={styles.editBtRight}>
+                                        <span onClick={editTaskApply} className={styles.editCancel}>
+                                          Cancel
+                                        </span>
+                                        <Button onClick={()=>editTaskSub(userInfo,item)}>Apply</Button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                ) : ''
+                              }
+
+
+                            </p>
+                        }
+
+                      </div>
+                      <i onClick={() => taskDel(item)}><DeleteOutlined /></i>
+                    </div>
+                  )
+                }
+                )
+              }
+              <div className={styles.addtask} onClick={showAddTask}>
+                <PlusOutlined />
+                <span>Add new task</span>
+              </div>
+              <div style={{ display: taskModal ? 'none' : 'block' }} className={styles.addInput}>
+                <Input
+                  onChange={(e) => setInputData(e.target?.value)}
+                  onBlur={inputBlur}
+                  allowClear={true}
+                  onPressEnter={addEnter}
+                  value={inputData}
+                />
+              </div>
+            </div>
+            {/* taskCompleted */}
+            <div className={styles.taskCompleted}>
+              <Collapse defaultActiveKey={['1']} >
+                <Panel header="Completed" key="1">
+                  {
+                    taskCompletedList.map((item, index) => {
+                      return (
+                        <div className={styles.cont}>
+                          <div>
+                            <div className={styles.des}>
+                              <Checkbox
+                                defaultChecked={item.completed ? 'true' : 'false'}
+                                onChange={(e) => checked(e, item)}
+                              >
+                              </Checkbox> <span className={styles.contTit}> {item.description} </span></div>
+                            {
+                              item.assignName ?
+                                <p><span style={{ fontSize: '20px', width: '24px', height: '24px', color: '#A3A3A3' }} className='iconfont icon_subnav1'><span style={{ fontSize: '14px', fontWeight: '500', verticalAlign: 'text-bottom', marginLeft: '8px', color: '#A3A3A3' }}>{item.assignName}</span></span> </p> :
+                                <p style={{ position: 'relative' }}>
+                                  <span style={{ fontSize: '20px', width: '24px', height: '24px', color: '#A3A3A3' }} className='iconfont icon_subnav1'>
+                                    <span style={{ fontSize: '14px', fontWeight: '500', verticalAlign: 'text-bottom', marginLeft: '8px', color: '#A3A3A3', textDecorationLine: 'underline' }}>
+                                      Assign a user
+                                    </span>
+                                  </span>
+                                </p>
+                            }
+                          </div>
+                          <i onClick={() => taskDel(item)}><DeleteOutlined /></i>
+                        </div>
+                      )
+                    }
+                    )
+                  }
+                </Panel>
+              </Collapse>
+
+            </div>
+          </div>
         )}
         {/* {showActive === 5 && (
           <div className={styles.duplicatesCtn}>

@@ -530,7 +530,7 @@ const [islittle,setIslittle]=useState(true)
                         {/* 0 */}
                       </span>
                     )}
-                    {icon.name === 'INTERNAL CHAT'  && (
+                    {icon.name === 'INTERNAL CHAT'  && chatReadLength > 0 ? (
                       <span
                          style={{
                             width:'8px',
@@ -547,9 +547,8 @@ const [islittle,setIslittle]=useState(true)
                             margin:'0px 0px 15px 20px'
                          }}
                       >
-                        {/* {chatReadLength || 0} */}
                       </span>
-                    )}
+                    ) : ''}
                   </div>
                 );
               }

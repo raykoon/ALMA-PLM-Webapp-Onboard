@@ -113,4 +113,28 @@ export const userLists = (data) => axios.get(`/styles/team/style/team/user/list/
 export const markerAddImg = (data) => axios.post(`/styles/file/marker/add`, data);
 
 
+export const closingTime = (data) => axios.post(`/styles/chat/update/closingTime`, data);
 
+
+export const getClosingTime = (data) => axios.post(`/styles/chat/${data.teamId}`, data);
+
+
+// task
+
+// 数据列表
+export const taskList = (data) => axios.post(`/styles/task/list`, data);
+
+// 新增接口 
+export const addTask = (data) => axios.post(`/styles/task`, data);
+
+// 批量删除 
+export const delTask = (data) => axios.post(`/styles/task/batch/${data.id}`, data);
+
+// 列表数量统计  
+export const taskNum = (data) => axios.post(`/styles/task/listCount`, data);
+
+// 选择框列表 
+export const taskOptionList = (data) => axios.get(`/styles/task/option`, data);
+
+// task修改  复选框   选择指定人
+export const editTask = (data) => axios.post(`/styles/task/update`, data);
